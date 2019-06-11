@@ -5,7 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 @Data
-public class UserVO {
+public class MemberVO {
 	private String id;
 	private String password;
 	private String name;

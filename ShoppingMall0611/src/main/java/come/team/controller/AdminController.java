@@ -1,6 +1,8 @@
 package come.team.controller;
 
 
+import java.security.Principal;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +27,8 @@ public class AdminController {
 	private ProductService productService;
 	
 	@GetMapping("/index")
-	public void index() {
-		
+	public void index(Principal principal) {
+		log.info("id: " + principal.getName());
 	}
 	
 	@GetMapping("/list")

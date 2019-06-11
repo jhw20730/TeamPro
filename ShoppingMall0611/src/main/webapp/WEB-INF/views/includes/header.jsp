@@ -158,7 +158,7 @@
 									<a href="/customLogout" class="text-uppercase">Logout</a>
 							</sec:authorize>
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="/member/getMember"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Cart</a></li>
 								<sec:authorize access="isAuthenticated()">
 									<li><a href="/customLogout"><i class="fa fa-unlock-alt"></i> Logout</a></li>

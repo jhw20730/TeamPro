@@ -31,7 +31,7 @@
 					<div class="footer">
 						<h3 class="footer-header">My Account</h3>
 						<ul class="list-links">
-							<li><a href="/aboutUs">My Account</a></li> <!-- 회원 정보 조회 -->
+							<li><a href="/member/getMember">My Account</a></li> <!-- 회원 정보 조회 -->
 							<li><a href="#">My Cart</a></li> <!--  장바구니 -->
 							<sec:authorize access="isAuthenticated()">
 								<li><a href="/customLogout">Logout</a></li>

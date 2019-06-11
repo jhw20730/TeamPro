@@ -18,7 +18,7 @@ import come.team.domain.Criteria;
 import come.team.domain.PageDTO;
 import come.team.domain.ProductVO;
 
-import come.team.domain.UserVO;
+import come.team.domain.MemberVO;
 
 import come.team.service.ProductService;
 

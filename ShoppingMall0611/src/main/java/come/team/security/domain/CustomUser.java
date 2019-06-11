@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import come.team.domain.UserVO;
+import come.team.domain.MemberVO;
 import lombok.Getter;
 
 @Getter
@@ -15,13 +15,13 @@ public class CustomUser extends User {
 
 	private static final long serialVersionUID = 1L;
 
-	private UserVO user;
+	private MemberVO user;
 
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
 
-	public CustomUser(UserVO vo) {
+	public CustomUser(MemberVO vo) {
 
 		super(vo.getId(), vo.getPassword(), vo.getAuthList().stream()
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
