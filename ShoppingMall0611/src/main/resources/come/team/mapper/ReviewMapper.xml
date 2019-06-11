@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="come.team.mapper.ReviewMapper">
+
+	<select id="getReviewList"
+		resultType="come.team.domain.ReviewVO">
+		<![CDATA[
+			select 
+				REVIEWNO, CARTNO, PRODUCTCODE, PAYCODE,
+				ID, NAME, CONTENT, REVIEWPOINT, REVIEWDATE
+			from (
+				select /*+ INDEX_DESC(TBL_REVIEW PK_REVIEW) */
+				rownum rn, REVIEWNO, CARTNO, PRODUCTCODE, PAYCODE,
+						   ID, NAME, CONTENT, REVIEWPOINT, REVIEWDATE
+				from TBL_REVIEW
+				where rownum <= #{criteria.pageNum} * #{criteria.amount}
+				)
+			where rn > (#{criteria.pageNum} -1) * #{criteria.amount} and productCode = #{productCode}
+		]]>
+	</select>
+	
+	<select id="countAllReview" resultType="int">
+		select count(*) from TBL_REVIEW where productCode = #{productCode}
+	</select>
+	
+<!-- 
+
+	<insert id="registerReview">
+	</insert>
+	
+	<update id="modifyReview">
+	</update>
+	
+	<delete id="deleteReview">
+	</delete>
+
+ -->
+	
+</mapper>
