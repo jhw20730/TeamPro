@@ -8,16 +8,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>E-SHOP HTML Template</title>
+	<title>2조 컴퓨터 판매 쇼핑몰 E-SHOP</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
 
 	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- 	<link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css" /> -->
 
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="../../../resources/css/slick.css" />
@@ -207,7 +208,7 @@
 			</div>
 			<!-- header -->
 			<script type="text/javascript" src="../../../resources/js/cart.js"></script>
-			<script tpe="text/javascript">
+			<script>
 				$(document).ready(function() {
 					
 					var id = "hong1";
@@ -271,6 +272,4 @@
 	<!-- /HEADER -->
 	
 	
-	<script type="text/javascript">
-	</script>
 	
