@@ -13,4 +13,6 @@ public interface MemberService {
 	void join(MemberVO vo); //회원 가입, 회원 정보 등록
 	
 	void update(MemberVO vo); //회원 정보 수정
+	
+	void delete(String id); //회원 탈퇴
 }

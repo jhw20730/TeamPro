@@ -45,4 +45,9 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public void delete(String id) {// 회원탈퇴
+		mapper.delete(id);
+	}
+
 }

@@ -64,5 +64,11 @@ WHERE mem.id = #{id}
 		email = #{email}
 	where id = #{id}
 </update>
+
+<delete id="delete">
+	delete 
+		from TBL_user  
+		where id = #{id} 
+</delete>
 	
 </mapper>

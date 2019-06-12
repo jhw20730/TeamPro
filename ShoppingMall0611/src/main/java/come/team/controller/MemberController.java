@@ -29,14 +29,14 @@ public class MemberController {
 		log.info("id: " + principal.getName());
 	}
 	
-	@GetMapping("/getMember")
+	@GetMapping("/getMember") //내 계정 정보 확인
 	public ModelAndView myAccount(Principal principal) {
 		String id = principal.getName();
 		MemberVO vo = service.getMember(id);
 		return new ModelAndView("/member/getMember", "member", vo);
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/modify") //내 계정 정보 수정
 	public String modify(MemberVO memberVO, SessionStatus status) {
 		log.info("post modify");
 		BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder();
@@ -47,5 +47,13 @@ public class MemberController {
 		return "redirect:/member/index";
 	}
 	
+	@GetMapping("/delete") //내 계정 정보 삭제
+	public void delete(String id, SessionStatus status) {
+		log.info("delete start");
+		service.delete(id);
+		//
+		status.setComplete();
+		log.info("delete finish");
+	}
 	
 }

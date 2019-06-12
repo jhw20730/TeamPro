@@ -55,6 +55,7 @@
 					<button type="reset" class="btn btn-default">RESET</button>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
+					<button onclick="location.href='/member/delete?id=${member.id}'">회원 탈퇴</button>
 
 		</div>
 		<!-- /row -->

@@ -26,12 +26,12 @@ public class AdminController {
 	
 	private ProductService productService;
 	
-	@GetMapping("/index")
+	@GetMapping("/index") //관리자 index를 관리자용 페이지
 	public void index(Principal principal) {
 		log.info("id: " + principal.getName());
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/list") //관리자가 상품 목록 확인
 	public void list(Criteria criteria, Model model) {	
 		criteria.setAmount(10);
 		
@@ -45,18 +45,20 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/view")
+	@GetMapping("/view") //관리자가 상품 상세 정보 확인
 	public void view(String productCode, Model model) {
 		model.addAttribute("product", productService.productView(productCode));
 	}
-	
-
-	@GetMapping("/register")
-	public void register() {
 		
+
+	//상품 정보 등록 페이지 매핑	
+	@GetMapping("/register") //관리자가 상품 정보 등록
+	public void register() {
+		log.info("get register");
 	}
 	
 	
+	// 상품 정보 등록하는 
 	@PostMapping("/register") //관리자가 제품 등록하는
 	public String register(ProductVO vo) {
 		productService.register(vo);
@@ -66,18 +68,19 @@ public class AdminController {
 		return "redirect:/admin/list";
 	}
 	
+	// 상품 정보 수정
 	@GetMapping("/update")
 	public void update(String productCode, Model model) {
 		model.addAttribute("board", productService.productView(productCode));
 	}
 	
 	@GetMapping("/updateCheck")
-	public void list(ProductVO vo, Model model) {
-		
+	public void list(ProductVO vo, Model model) {	
 		log.info(vo);
 		productService.update(vo);
 	}
 	
+	// 상품 정보 삭제
 	@GetMapping("/delete")
 	public void delete(String productCode, Model model) {
 		log.info("delete sequence start "+productCode);
