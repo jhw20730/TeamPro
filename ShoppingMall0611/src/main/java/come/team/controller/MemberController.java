@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/member")
+@RequestMapping("/member/*")
 @AllArgsConstructor
 public class MemberController {
 	
@@ -47,13 +48,19 @@ public class MemberController {
 		return "redirect:/member/index";
 	}
 	
-	@GetMapping("/delete") //내 계정 정보 삭제
-	public void delete(String id, SessionStatus status) {
+	// 회원 탈퇴 페이지 매핑
+	@GetMapping("/deleteForm") 
+	public void delete() {
+		log.info("get deleteForm");
+	}
+	
+	// 회원 탈퇴
+	@PostMapping("/deletePro") 
+	public String deleteProcess(@RequestParam("id") String id) {
 		log.info("delete start");
 		service.delete(id);
-		//
-		status.setComplete();
 		log.info("delete finish");
+		return "redirect:/";
 	}
 	
 }
