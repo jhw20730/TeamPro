@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class ReviewVO {
-	int reviewNo;
-	int cartNo;
-	String productCode;
-	String payCode;
-	String id;
-	String name;
-	String content;
-	int reviewPoint;
-	Date reviewDate;
+	int reviewNo; //seq
+	int cartNo; 
+	String productCode; //form
+	String payCode; 
+	String id; //principal로 가져오기
+	String name; //principal -> getMember -> getName
+	String content; //form
+	int reviewPoint; //form
+	Date reviewDate; //sysdate
 }

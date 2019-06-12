@@ -1,4 +1,3 @@
-console.log("review js...");
 
 var reviewService = (function() {
 

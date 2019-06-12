@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import come.team.domain.Criteria;
-import come.team.domain.ProductVO;
+import come.team.domain.PaymentVO;
 import come.team.domain.ReviewPageDTO;
 import come.team.domain.ReviewVO;
 import come.team.mapper.ReviewMapper;
@@ -36,11 +36,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return new ReviewPageDTO(mapper.countAllReview(productCode), mapper.getReviewList(criteria, productCode));
 	}
 
-//	@Override
-//	public int registerReview(ReviewVO reviewVO) {
-//		return mapper.registerReview(reviewVO);
-//	}
-//
+	@Override
+	public void registerReview(ReviewVO reviewVO) {
+		mapper.registerReview(reviewVO);
+	}
+
 //	@Override
 //	public int modifyReview(ReviewVO reviewVO) {
 //		return mapper.modifyReview(reviewVO);
@@ -51,4 +51,9 @@ public class ReviewServiceImpl implements ReviewService {
 //		return mapper.deleteReview(reviewNo);
 //	}
 
+	@Override
+	public PaymentVO checkPayment(String id, String productCode) {
+		return mapper.checkPayment(id, productCode);
+		
+	}
 }

@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 	
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<title>2조 컴퓨터 판매 쇼핑몰 E-SHOP</title>
@@ -17,8 +18,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
 
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!-- 	<link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css" /> -->
+	<link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css" />
 
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="../../../resources/css/slick.css" />
@@ -46,7 +46,6 @@
 	margin-left: 400px;
 	margin-top: -40px;
 }
-
 #httr1 {
 	border: 1px solid rgb(169, 169, 169);
 	width: 100px;
@@ -56,13 +55,11 @@
 	line-height: 1.42857143;
 	color: #4A4E5A;
 }
-
 #httr2 {
 	border: 1px solid rgb(169, 169, 169);
 	width: 229px;
 	padding: 0px 10px 0px 10px;
 }
-
 #price {
 	display: inline;
 	width: 150px;
@@ -123,16 +120,6 @@
 								<option value="M">Manufacturer</option>
 								<option value="D">Description</option>
 							</select>
-							
-							<!-- <table id="headtbl">
-								<tr>
-									<td id="httr1">Price</td>
-									<td id="httr2">0 <input type="range" id="price"
-										name="price" value="100"> 
-										<output name="x" for="price" style="display:inline;"/>
-									</td>
-							</table> -->
-							
 							<button class="form"><i class="fa fa-search"></i></button>
 							<input type="hidden" name="pageNum"	value="${pageMaker.cri.pageNum }"> 
 							<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> 
@@ -176,27 +163,16 @@
 						<li class="header-cart dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<strong class="text-uppercase">My Cart:</strong>
-								<br>
-								<span>35.20$</span> <!-- ì¥ë°êµ¬ë ì´ ê°ê²© count -->
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
 										<!-- product widget -->
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div> 
+
 										<!-- end widget -->
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
+										<button class="main-btn" onclick="location.href='/cart/list'">View Cart</button>
 										<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
 									</div>
 								</div>
@@ -208,10 +184,9 @@
 			</div>
 			<!-- header -->
 			<script type="text/javascript" src="../../../resources/js/cart.js"></script>
-			<script>
+			<script type="text/javascript">
 				$(document).ready(function() {
 					
-					var id = "hong1";
 					var myCart = $(".shopping-cart-list");
 					
 					showCartList();
@@ -242,8 +217,9 @@
 					
 				}); // end document.ready
 			</script>
-			
-	<!-- NAVIGATION -->
+
+
+			<!-- NAVIGATION -->
 	<div id="navigation">
 		<!-- container -->
 		<div class="container">
@@ -257,7 +233,6 @@
 						<li><a href="/product/list?type=productType&keyword=데스크탑">PC</a></li>
 						<li><a href="/product/list?type=productType&keyword=노트북">Laptop</a></li>
 						<li><a href="/product/list?type=productType&keyword=모니터">Monitor</a></li>
-						<li><a href="/admin/index">관리자용</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -272,4 +247,6 @@
 	<!-- /HEADER -->
 	
 	
+	<script type="text/javascript">
+	</script>
 	

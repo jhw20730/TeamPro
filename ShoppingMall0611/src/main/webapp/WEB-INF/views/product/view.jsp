@@ -1,10 +1,8 @@
 <%@page import="come.team.domain.ProductVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@include file="../includes/header.jsp"%>
 
 <!-- section -->
@@ -67,7 +65,7 @@
 									
 									var cart = {
 										amount : amount,	
-										productCode : productCode,
+										productCode : productCode
 										/* id : id */
 									};
 
@@ -106,7 +104,7 @@
 						<ul class="tab-nav">
 							<li class="active"><a data-toggle="tab" href="#tab1">사양</a></li>
 							<li><a data-toggle="tab" href="#tab1">Details</a></li>
-							<li><a data-toggle="tab" href="#tab2">Reviews (3)</a></li>
+							<li><a data-toggle="tab" href="#tab2">Reviews</a></li>
 						</ul>
 						<div class="tab-content">
 							<div id="tab1" class="tab-pane fade in active">
@@ -117,7 +115,7 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="product-reviews">
-											<div class="chat"> <!-- single review : review content -->
+											<div class="reviewList"> <!-- single review : review content -->
 											
 											</div> <!-- end single review -->
 
@@ -129,35 +127,53 @@
 									</div>
 									<div class="col-md-6">
 										<h4 class="text-uppercase">Write Your Review</h4>
-										<p>Your email address will not be published.</p>
-										<form class="review-form">
+										<p> 고객만 리뷰를 작성할 수 있습니다. </p>
+										<form class="review-form" action="/reviews/register" method="post">
 											<div class="form-group">
-												<input class="input" type="text" placeholder="Your Name" />
-											</div>
+												<input class="input" type="text" name="productCode" name="productCode" value="${board.productCode }" readonly="readonly" />
+											</div>											
 											<div class="form-group">
-												<input class="input" type="email"
-													placeholder="Email Address" />
-											</div>
-											<div class="form-group">
-												<textarea class="input" placeholder="Your review"></textarea>
+												<textarea class="input" placeholder="Write your review" name="content"></textarea>
 											</div>
 											<div class="form-group">
 												<div class="input-rating">
 													<strong class="text-uppercase">Your Rating: </strong>
 													<div class="stars">
-														<input type="radio" id="star5" name="rating" value="5" /><label
-															for="star5"></label> <input type="radio" id="star4"
-															name="rating" value="4" /><label for="star4"></label> <input
-															type="radio" id="star3" name="rating" value="3" /><label
-															for="star3"></label> <input type="radio" id="star2"
-															name="rating" value="2" /><label for="star2"></label> <input
-															type="radio" id="star1" name="rating" value="1" /><label
-															for="star1"></label>
+														<input type="radio" id="star5" name="reviewPoint" value="5" /><label	for="star5"></label> 
+														<input type="radio" id="star4" name="reviewPoint" value="4" /><label for="star4"></label>
+														<input type="radio" id="star3" name="reviewPoint" value="3" /><label for="star3"></label> 
+														<input type="radio" id="star2" name="reviewPoint" value="2" /><label for="star2"></label> 
+														<input type="radio" id="star1" name="reviewPoint" value="1" /><label for="star1"></label>
 													</div>
 												</div>
 											</div>
-											<button class="primary-btn">Submit</button>
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+											<sec:authorize access="isAuthenticated()">
+												<button id="submitReview" class="primary-btn">Submit</button>
+											</sec:authorize>
+											
+											<sec:authorize access="isAnonymous()">
+												<button onclick="location.href='/customLogin'" class="primary-btn">Submit</button>
+											</sec:authorize>
+											
 										</form>
+										
+										<script>
+											$("#submitReview").on("click", function(){
+												$.ajax({
+													url : "/reviews/register",
+													type : "post",
+													data : (".review-form").serialize(),
+													success : function(){
+														alert("리뷰를 작성하셨습니다.");
+													},
+													error : function(){
+														alert("error");
+													}
+												});
+											});
+										</script>
+									
 									</div>
 								</div>
 
@@ -186,8 +202,9 @@
 						
 						//review
 						var productCode = "<c:out value='${board.productCode}'/>";
-						var replyUL = $(".chat");
-						
+						var replyUL = $(".reviewList");
+
+						console.log("showList(1)");
 						showList(1);
 						
 						function showList(page){
