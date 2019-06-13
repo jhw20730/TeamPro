@@ -3,12 +3,18 @@ package come.team.controller;
 import java.security.Principal;
 import java.util.List;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import come.team.domain.CartVO;
@@ -50,5 +56,40 @@ public class CartController {
 			cartList.get(i).setPrice(productVO.getPrice());
 		}
 		model.addAttribute("cart", cartList);
+	}
+	
+	// 카트 삭제
+	@ResponseBody
+	@PostMapping(value = "/deleteCart")
+	public void deleteCart(@RequestParam(value = "chbox[]") List<String> chArr) throws Exception {
+		log.info("delete cart");
+
+		int cartNo = 0;
+
+		for (String i : chArr) {
+			CartVO cart = new CartVO();
+			cartNo = Integer.parseInt(i);
+			cart.setCartNo(cartNo);
+			cartService.deleteCart(cart);
+			}
+	}
+		
+	@GetMapping(value = "/cartList/json",
+			produces = {
+						MediaType.APPLICATION_XML_VALUE,
+						MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<CartVO>> getReviewList(Principal principal, Model model){
+		String id = principal.getName();
+
+		List<CartVO> cartList = cartService.getCartList(id);
+
+		for (int i = 0; i < cartList.size(); i++) {
+			ProductVO productVO = productService.productView(cartList.get(i).getProductCode());
+			cartList.get(i).setProductName(productVO.getProductName());
+			cartList.get(i).setDescription(productVO.getDescription());
+			cartList.get(i).setPrice(productVO.getPrice());
+		}
+				
+		return new ResponseEntity<List<CartVO>>(cartList, HttpStatus.OK);
 	}
 }

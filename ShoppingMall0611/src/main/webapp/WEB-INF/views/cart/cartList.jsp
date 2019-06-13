@@ -101,7 +101,7 @@
 								},
 								success : function() {
 									alert("삭제 성공");
-										location.href = "/cart/list";
+										location.href = "/cart/cartList";
 								},
 								error : function(){
 									alert("삭제 실패");

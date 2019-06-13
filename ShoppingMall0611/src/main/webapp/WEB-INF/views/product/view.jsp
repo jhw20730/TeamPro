@@ -58,7 +58,7 @@
 							
 							<input type="hidden" name="productCode" value="${board.productCode }">		
 							<input type="hidden" name="price" value="${board.price }">	
-							<input type="hidden" name="id" value="${id }">	
+							<input type="hidden" name="id" value="<sec:authentication property='principal.username'/>">	
 							<input type="hidden" name="productName" value="${board.productName }">	
 							<input type="hidden" name="description" value="${board.description } ">		
 							<input type="submit" class="primary-btn add-to-cart" name="addCart" id="addCart" value="장바구니 담기">	
@@ -112,35 +112,57 @@
 									</div>
 									<div class="col-md-6">
 										<h4 class="text-uppercase">Write Your Review</h4>
-										<p>Your email address will not be published.</p>
-										<form class="review-form">
+										<p> 고객만 리뷰를 작성할 수 있습니다. </p>
+										<form name="review-form" class="review-form" action="/reviews/register" method="post">
 											<div class="form-group">
-												<input class="input" type="text" placeholder="Your Name" />
-											</div>
+												<input class="input" type="text" id="productCode" name="productCode" name="productCode" value="${board.productCode }" readonly="readonly" />
+											</div>											
 											<div class="form-group">
-												<input class="input" type="email"
-													placeholder="Email Address" />
-											</div>
-											<div class="form-group">
-												<textarea class="input" placeholder="Your review"></textarea>
+												<textarea class="input" placeholder="Write your review" name="content"></textarea>
 											</div>
 											<div class="form-group">
 												<div class="input-rating">
 													<strong class="text-uppercase">Your Rating: </strong>
 													<div class="stars">
-														<input type="radio" id="star5" name="rating" value="5" /><label
-															for="star5"></label> <input type="radio" id="star4"
-															name="rating" value="4" /><label for="star4"></label> <input
-															type="radio" id="star3" name="rating" value="3" /><label
-															for="star3"></label> <input type="radio" id="star2"
-															name="rating" value="2" /><label for="star2"></label> <input
-															type="radio" id="star1" name="rating" value="1" /><label
-															for="star1"></label>
+														<input type="radio" id="star5" name="reviewPoint" value="5" /><label for="star5"></label> 
+														<input type="radio" id="star4" name="reviewPoint" value="4" /><label for="star4"></label>
+														<input type="radio" id="star3" name="reviewPoint" value="3" /><label for="star3"></label> 
+														<input type="radio" id="star2" name="reviewPoint" value="2" /><label for="star2"></label> 
+														<input type="radio" id="star1" name="reviewPoint" value="1" /><label for="star1"></label>
 													</div>
 												</div>
 											</div>
-											<button class="primary-btn">Submit</button>
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
 										</form>
+											<sec:authorize access="isAuthenticated()">
+												<button id="submitReview" class="primary-btn">Submit</button>
+											</sec:authorize>										
+											<sec:authorize access="isAnonymous()">
+												<button onclick="location.href='/customLogin'" class="btn btn-warning">Submit</button>
+											</sec:authorize>									
+										<script>
+											$("#submitReview").on("click", function(e){
+												e.preventDefault();
+												
+												var reviewVO = $("form[name=review-form]").serialize();
+												
+												$.ajax({
+													url : "/reviews/register",
+													type : "post",
+													data : reviewVO,
+													success : function() {
+														alert("리뷰를 작성하셨습니다.");
+														window.location.href ="view?productCode=<c:out value='${board.productCode}'/>";
+													},
+													error : function() {
+														alert("구매한 상품에만 리뷰를 작성하실 수 있습니다.");
+													}
+												});
+											});
+										</script>
+									
+									
 									</div>
 								</div>
 

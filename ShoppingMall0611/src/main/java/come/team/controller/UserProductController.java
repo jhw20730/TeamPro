@@ -8,14 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import come.team.domain.Criteria;
 import come.team.domain.PageDTO;
 import come.team.domain.ProductVO;
-
-
 import come.team.service.ProductService;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -26,8 +22,8 @@ import lombok.extern.log4j.Log4j;
 public class UserProductController {
 	
 	private ProductService productService;
-	/*private CartService cartservice;
-	private ReviewService reviewService;*/
+	/*private CartService cartservice;*/
+//	private ReviewService reviewService;
 	
 	@GetMapping("/list")
 	public void list(Criteria criteria, Model model) {
@@ -46,14 +42,9 @@ public class UserProductController {
 	
 	@GetMapping("/view")
 	public void view(String productCode, Model model, Principal principal) {
-		String id = principal.getName();
 		ProductVO productVO = productService.productView(productCode);
-		Criteria criteria = new Criteria(1, 10);
-		/*List<ReviewVO> reviewList = reviewService.getReviewList(criteria, productCode);*/
-				
 		model.addAttribute("board", productVO);
-		model.addAttribute("id", id);
-		/*model.addAttribute("review", reviewList);*/
+		
 	}
 	
 }
