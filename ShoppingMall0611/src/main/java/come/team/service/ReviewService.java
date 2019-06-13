@@ -12,8 +12,8 @@ import come.team.domain.ReviewVO;
 
 public interface ReviewService {
 	
-	List<ReviewVO> getReviewList(@Param("criteria") Criteria criteria, @Param("productCode") String productCode);
-	int countAllReview(String productCode);
+	public List<ReviewVO> getReviewList(@Param("criteria") Criteria criteria, @Param("productCode") String productCode);
+	public int countAllReview(String productCode);
 	
 	public ReviewPageDTO getReviewListPage(Criteria criteria, String productCode);
 

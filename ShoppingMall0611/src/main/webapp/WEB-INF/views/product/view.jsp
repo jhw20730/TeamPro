@@ -128,9 +128,9 @@
 									<div class="col-md-6">
 										<h4 class="text-uppercase">Write Your Review</h4>
 										<p> 고객만 리뷰를 작성할 수 있습니다. </p>
-										<form class="review-form" action="/reviews/register" method="post">
+										<form name="review-form" class="review-form" action="/reviews/register" method="post">
 											<div class="form-group">
-												<input class="input" type="text" name="productCode" name="productCode" value="${board.productCode }" readonly="readonly" />
+												<input class="input" type="text" id="productCode" name="productCode" name="productCode" value="${board.productCode }" readonly="readonly" />
 											</div>											
 											<div class="form-group">
 												<textarea class="input" placeholder="Write your review" name="content"></textarea>
@@ -139,7 +139,7 @@
 												<div class="input-rating">
 													<strong class="text-uppercase">Your Rating: </strong>
 													<div class="stars">
-														<input type="radio" id="star5" name="reviewPoint" value="5" /><label	for="star5"></label> 
+														<input type="radio" id="star5" name="reviewPoint" value="5" /><label for="star5"></label> 
 														<input type="radio" id="star4" name="reviewPoint" value="4" /><label for="star4"></label>
 														<input type="radio" id="star3" name="reviewPoint" value="3" /><label for="star3"></label> 
 														<input type="radio" id="star2" name="reviewPoint" value="2" /><label for="star2"></label> 
@@ -148,25 +148,30 @@
 												</div>
 											</div>
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+										</form>
 											<sec:authorize access="isAuthenticated()">
 												<button id="submitReview" class="primary-btn">Submit</button>
-											</sec:authorize>
-										</form>
+											</sec:authorize>										
 											<sec:authorize access="isAnonymous()">
 												<button onclick="location.href='/customLogin'" class="btn btn-warning">Submit</button>
 											</sec:authorize>									
 										<script>
-											$("#submitReview").on("click", function(){
+											$("#submitReview").on("click", function(e){
+												e.preventDefault();
+												
+												var reviewVO = $("form[name=review-form]").serialize();
+												
 												$.ajax({
 													url : "/reviews/register",
 													type : "post",
-													data : (".review-form").serialize(),
+													data : reviewVO,
 													success : function() {
 														alert("리뷰를 작성하셨습니다.");
-														window.location.replace ="view?productCode=" + productCode;
+														window.location.href ="view?productCode=<c:out value='${board.productCode}'/>";
 													},
 													error : function() {
-														alert("error");
+														alert("구매한 상품에만 리뷰를 작성하실 수 있습니다.");
 													}
 												});
 											});
@@ -200,10 +205,9 @@
 					function() {
 						
 						//review
-						var productCode = "<c:out value='${board.productCode}'/>";
+						var productCode = $("#productCode").val();
 						var replyUL = $(".reviewList");
 
-						console.log("showList(1)");
 						showList(1);
 						
 						function showList(page){

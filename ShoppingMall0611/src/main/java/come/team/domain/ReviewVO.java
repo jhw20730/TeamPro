@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ReviewVO {
+	
 	int reviewNo; //seq
 	int cartNo; 
 	String productCode; //form
@@ -15,4 +16,5 @@ public class ReviewVO {
 	String content; //form
 	int reviewPoint; //form
 	Date reviewDate; //sysdate
+	
 }

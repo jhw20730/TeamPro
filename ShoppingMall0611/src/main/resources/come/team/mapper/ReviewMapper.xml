@@ -15,17 +15,15 @@
 				rownum rn, REVIEWNO, CARTNO, PRODUCTCODE, PAYCODE,
 						   ID, NAME, CONTENT, REVIEWPOINT, REVIEWDATE
 				from TBL_REVIEW
-				where rownum <= #{criteria.pageNum} * #{criteria.amount}
+				where productCode = #{productCode} and rownum <= #{criteria.pageNum} * #{criteria.amount}
 				)
-			where rn > (#{criteria.pageNum} -1) * #{criteria.amount} and productCode = #{productCode}
+			where rn > (#{criteria.pageNum} -1) * #{criteria.amount}
 		]]>
 	</select>
 	
 	<select id="countAllReview" resultType="int">
 		select count(*) from TBL_REVIEW where productCode = #{productCode}
 	</select>
-	
-
 
 	<insert id="registerReview">
 		insert into 

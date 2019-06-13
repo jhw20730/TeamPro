@@ -33,16 +33,13 @@ public class UserReviewController {
 	private ReviewService reviewService;
 	private MemberService memberService;
 	
-	@ResponseBody	
 	@GetMapping(value = "/{productCode}/{page}",
 		produces = {
 				MediaType.APPLICATION_XML_VALUE,
 				MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReviewPageDTO> getReviewList(@PathVariable("page") int page, 
 												  @PathVariable("productCode") String productCode){
-		log.info("get Review list");
 		Criteria criteria = new Criteria(page, 10);
-		log.info(criteria);
 		
 		return new ResponseEntity<ReviewPageDTO>(reviewService.getReviewListPage(criteria, productCode), HttpStatus.OK);
 	}

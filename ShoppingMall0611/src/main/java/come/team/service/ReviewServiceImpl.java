@@ -31,7 +31,6 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.countAllReview(productCode);
 	}
 
-	@Override
 	public ReviewPageDTO getReviewListPage(Criteria criteria, String productCode) {
 		return new ReviewPageDTO(mapper.countAllReview(productCode), mapper.getReviewList(criteria, productCode));
 	}
