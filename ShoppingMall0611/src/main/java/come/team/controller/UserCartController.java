@@ -89,7 +89,12 @@ public class UserCartController {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<List<CartVO>> getReviewList(Principal principal, Model model) {
 
-		String id = principal.getName();
+		String id;
+		try {
+			id = principal.getName();
+		} catch (Exception e) {
+			id = "member123";
+		}
 
 		List<CartVO> cartList = cartService.getCartList(id);
 

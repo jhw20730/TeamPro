@@ -56,35 +56,7 @@
 							<button type="button" class="primary-btn add-to-cart" id="addCart">
 								<i class="fa fa-shopping-cart"></i> 장바구니 담기
 							</button>
-							
-							<script>
-								$("#addCart").on("click", function(e) {
-									e.preventDefault();
-									var productCode = "<c:out value='${board.productCode}'/>";
-									var amount = $("#amount").val();
-									
-									var cart = {
-										amount : amount,	
-										productCode : productCode
-										/* id : id */
-									};
 
-									$.ajax({
-										url : "/cart/add",
-										type : "post",
-										data : cart,	
-										success : function() {
-											alert("카트 담기 성공");
-											window.location.href = '/cart/list';
-										},
-										error : function() {
-											alert("카트 담기 실패");
-										}
-									});
-								});
-							
-								
-							</script>
 							<div class="pull-right">
 								<button class="main-btn icon-btn">
 									<i class="fa fa-heart"></i>
@@ -156,28 +128,6 @@
 											<sec:authorize access="isAnonymous()">
 												<button onclick="location.href='/customLogin'" class="btn btn-warning">Submit</button>
 											</sec:authorize>									
-										<script>
-											$("#submitReview").on("click", function(e){
-												e.preventDefault();
-												
-												var reviewVO = $("form[name=review-form]").serialize();
-												
-												$.ajax({
-													url : "/reviews/register",
-													type : "post",
-													data : reviewVO,
-													success : function() {
-														alert("리뷰를 작성하셨습니다.");
-														window.location.href ="view?productCode=<c:out value='${board.productCode}'/>";
-													},
-													error : function() {
-														alert("구매한 상품에만 리뷰를 작성하실 수 있습니다.");
-													}
-												});
-											});
-										</script>
-										
-									
 									</div>
 								</div>
 
@@ -197,142 +147,287 @@
 </div>
 <!-- /section -->
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"></h4>
+			</div> <!-- /modal-header -->
+			<div class="modal-body">
+			
+			</div> <!-- /modal-body -->
+			<div class="modal-footer">
+				<button id="modalModifyBtn" class="btn btn-warning">Modify</button>
+				<button id="modalDeleteBtn" class="btn btn-danger">Delete</button>
+				<button id="modalCloseBtn" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+			</div> <!-- /modal-footer -->
+		</div> <!-- /modal-content -->
+	</div> <!-- /modal-dialog -->
+</div> <!-- /Modal -->
+
+<style>
+  /* The Modal (background) */
+  .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%; /* Could be more or less, depending on screen size */                          
+  }
+
+</style>
+
+
 <script type="text/javascript" src="../../../resources/js/review.js"></script>
 
+<!-- 리뷰 등록 스크립트 -->
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						
-						//review
-						var productCode = $("#productCode").val();
-						var replyUL = $(".reviewList");
+$("#submitReview").on("click",function(e) {
+	e.preventDefault();
 
-						showList(1);
-						
-						function showList(page){
-							reviewService.getList({productCode:productCode, page:page}, function(reviewCnt, list){
-								
-								console.log("reviewCnt: " + reviewCnt);
-								console.log("list: " + list);
-								
-								if(page == -1){
-									pageNum = Math.ceil(reviewCnt/10.0);
-									showList(pageNum);
-									return;
-								}
-								
-								var str = "";
-								if(list == null || list.length == 0){
-									replyUL.html("");
-									return;
-								}
-								for(var i = 0, len = list.length || 0; i < len; i++){
-									
-									str += "<div class='single-review'>";
-									str += "<div class='review-heading'>";
-									str += "<div><b> No. " + list[i].reviewNo + "</b></div>";
-									str += "<div><i class='fa fa-user-o'></i>" + list[i].id + "</a></div>";
-									str += "<div><i class='fa fa-clock-o'></i>" + reviewService.displayTime(list[i].reviewDate) + "</a></div>";
-									str += "</div>";
-									
-									str += "<div class='review-rating pull-right'>";
-										for(var j = 0; j < list[i].reviewPoint; j++){
-											str += "<i class='fa fa-star'></i>";
+	var reviewVO = $("form[name=review-form]").serialize();
+
+	$.ajax({
+		url : "/reviews/register",
+		type : "post",
+		data : reviewVO,
+		success : function() {
+			alert("리뷰를 작성하셨습니다.");
+			window.location.href = "view?productCode=<c:out value='${board.productCode}'/>";
+		},
+		error : function() {
+			alert("구매한 상품에만 리뷰를 작성하실 수 있습니다.");
+		}
+	});
+});
+</script>
+
+<!-- 리뷰 상세 조회 스크립트 -->
+<script type="text/javascript">
+function viewReview(reviewNo){
+	
+	console.log("viewReview...");
+	
+	var modalBody = $(".modal-body");
+	var modalTitle = $(".modal-title");
+	
+	modalTitle.html("View Review");
+	
+	var str = "";
+	
+	reviewService.getReview({reviewNo : reviewNo}, function(reviewVO){
+		str += "<div class='modal-group'>";
+		str += "<p>modal</p>";
+		str += "</div>";
+	}); //end reviewService.getReview function
+	
+	modalBody.html(str);
+	
+	$("#myModal").show();
+} //end viewReview
+
+</script>
+
+<!-- 리뷰 리스트 조회 스크립트 -->
+<script type="text/javascript">
+$(document)
+	.ready(
+			function() {
+
+				//review
+				var productCode = $("#productCode").val();
+				var replyUL = $(".reviewList");
+
+				showList(1);
+
+				function showList(page) {
+					reviewService
+							.getList(
+									{
+										productCode : productCode,
+										page : page
+									},
+									function(reviewCnt, list) {
+
+										if (page == -1) {
+											pageNum = Math
+													.ceil(reviewCnt / 10.0);
+											showList(pageNum);
+											return;
 										}
-										for(var k = list[i].reviewPoint; k < 5; k++){
-											str += "<i class='fa fa-star-o empty'></i>";
+
+										var str = "";
+										if (list == null
+												|| list.length == 0) {
+											replyUL.html("");
+											return;
 										}
-									str += "</div>";
-									
-									str += '<div class="review-body">';
-									str += '<p>' + list[i].content + '</p>';
-									str += "</div>";
-									str += "</div>";
-								}
-								replyUL.html(str);
-								showReviewPage(reviewCnt);
-								
-								}); //end function
-						}//end showList()
-						
-						var pageNum = 1;
-						var reviewPageFooter = $(".panel-footer");
-						
-						function showReviewPage(reviewCnt){
-							var endNum = Math.ceil(pageNum / 10.0) * 10;
-							var startNum = endNum - 9;
-							
-							var prev = startNum != 1;
-							var next = false;
-							
-							if(endNum * 10 >= reviewCnt){
-								endNum = Math.ceil(reviewCnt/10.0);
-							}
-							if(endNum * 10 < reviewCnt){
-								next = true;
-							}
-							
-							var str = "<ul class='pagination pull-right'>";
-							
-							if(prev){
-								str += "<li class='page-item'><a class='page-link' href='" + (startNum-1) + "'>Previous</a></li>'";
-							}
-							
-							for (var i = startNum ; i <=endNum; i++){
-								var active = pageNum == i ? "active" : "";
-								str += "<li class=page-item " + active + "><a class='page-link' href='" + i + "'> " + i + "</a></li>";
-							}
-							
-							if(next){
-								str += "<li class='page-item'> <a class='page-link' href='" + (endNum + 1) + "'>Next</a></li>";
-							}
-							str += "</ul>";
-							console.log(str);
-							reviewPageFooter.html(str);
-						} //end showReviewPage
-						
-						reviewPageFooter.on("click", "li a", function(e){
+										for (var i = 0, len = list.length || 0; i < len; i++) {
+
+											str += "<div class='single-review'>";
+											str += "<div class='review-heading'>";
+											str += "<div><b> No. "
+													+ list[i].reviewNo
+													+ "</b></div>";
+											str += "<div><i class='fa fa-user-o'></i>"
+													+ list[i].id
+													+ "</a></div>";
+											str += "<div><i class='fa fa-clock-o'></i>"
+													+ reviewService
+															.displayTime(list[i].reviewDate)
+													+ "</a></div>";
+											str += "</div>";
+
+											str += "<div class='review-rating pull-right'>";
+											for (var j = 0; j < list[i].reviewPoint; j++) {
+												str += "<i class='fa fa-star'></i>";
+											}
+											for (var k = list[i].reviewPoint; k < 5; k++) {
+												str += "<i class='fa fa-star-o empty'></i>";
+											}
+											str += "</div>";
+
+											str += '<div class="review-body">';
+											str += '<p>'
+													+ list[i].content
+													+ '</p>';
+											str += "</div>";
+											str += "<button class='btn btn-warning btn-xs pull-right viewReview' data-toggle='modal' data-target='#myModal' onclick='viewReview(" + list[i].reviewNo + ")'>" 
+													+ "View" 
+													+ "</button>";
+											str += "<br>";
+											str += "</div>";
+										}
+										replyUL.html(str);
+										showReviewPage(reviewCnt);
+
+									}); //end function
+				}//end showList()
+
+				var pageNum = 1;
+				var reviewPageFooter = $(".panel-footer");
+
+				function showReviewPage(reviewCnt) {
+					var endNum = Math.ceil(pageNum / 10.0) * 10;
+					var startNum = endNum - 9;
+
+					var prev = startNum != 1;
+					var next = false;
+
+					if (endNum * 10 >= reviewCnt) {
+						endNum = Math.ceil(reviewCnt / 10.0);
+					}
+					if (endNum * 10 < reviewCnt) {
+						next = true;
+					}
+
+					var str = "<ul class='pagination pull-right'>";
+
+					if (prev) {
+						str += "<li class='page-item'><a class='page-link' href='"
+								+ (startNum - 1)
+								+ "'>Previous</a></li>'";
+					}
+
+					for (var i = startNum; i <= endNum; i++) {
+						var active = pageNum == i ? "active" : "";
+						str += "<li class=page-item " + active + "><a class='page-link' href='" + i + "'> "
+								+ i + "</a></li>";
+					}
+
+					if (next) {
+						str += "<li class='page-item'> <a class='page-link' href='"
+								+ (endNum + 1) + "'>Next</a></li>";
+					}
+					str += "</ul>";
+					console.log(str);
+					reviewPageFooter.html(str);
+				} //end showReviewPage
+
+				reviewPageFooter.on("click", "li a", function(e) {
+					e.preventDefault();
+					var targetPageNum = $(this).attr("href");
+					console.log("targetPageNum : " + targetPageNum);
+					pageNum = targetPageNum;
+					showList(pageNum);
+				});
+
+				//actionForm
+				var actionForm = $("#actionForm");
+				//pageinate_button이라는 클래스에 존재하는 a 태그를 클랙했을 때
+				$(".paginate_button a").on(
+						"click",
+						function(e) {
+							//현재 이벤트의 기본 이벤트를 중단한다.
 							e.preventDefault();
-							var targetPageNum = $(this).attr("href");
-							console.log("targetPageNum : " + targetPageNum);
-							pageNum = targetPageNum;
-							showList(pageNum);
+							console.log('click');
+							//actionForm의 하위 요소를 찾아서 href라는 속성의 값을 대입한다.
+							actionForm.find("input[name='pageNum']")
+									.val($(this).attr("href"));
+							actionForm.submit();
 						});
-						
-						
-						//actionForm
-						var actionForm = $("#actionForm");
-						//pageinate_button이라는 클래스에 존재하는 a 태그를 클랙했을 때
-						$(".paginate_button a").on(
+				//상세히 보기
+				$(".move")
+						.on(
 								"click",
 								function(e) {
-									//현재 이벤트의 기본 이벤트를 중단한다.
 									e.preventDefault();
-									console.log('click');
-									//actionForm의 하위 요소를 찾아서 href라는 속성의 값을 대입한다.
-									actionForm.find("input[name='pageNum']")
-											.val($(this).attr("href"));
+									//선택한 요소 끝에 내용을 추가한다.
+									actionForm
+											.append("<input type='hidden' name='bno' value='"
+													+ $(this).attr(
+															"href")
+													+ "'>");
+									actionForm.attr("action",
+											"/board/get");
 									actionForm.submit();
 								});
-						//상세히 보기
-						$(".move")
-								.on(
-										"click",
-										function(e) {
-											e.preventDefault();
-											//선택한 요소 끝에 내용을 추가한다.
-											actionForm
-													.append("<input type='hidden' name='bno' value='"
-															+ $(this).attr(
-																	"href")
-															+ "'>");
-											actionForm.attr("action",
-													"/board/get");
-											actionForm.submit();
-										});
 
-					});
+			});
+</script>
+
+
+<!-- 카트 등록 스크립트 -->
+<script>
+	$("#addCart").on("click", function(e) {
+		e.preventDefault();
+		var productCode = "<c:out value='${board.productCode}'/>";
+		var amount = $("#amount").val();
+
+		var cart = {
+			amount : amount,
+			productCode : productCode
+		/* id : id */
+		};
+
+		$.ajax({
+			url : "/cart/add",
+			type : "post",
+			data : cart,
+			success : function() {
+				alert("카트 담기 성공");
+				window.location.href = '/cart/list';
+			},
+			error : function() {
+				alert("카트 담기 실패");
+			}
+		});
+	});
 </script>
 
 <%@include file="../includes/footer.jsp"%>

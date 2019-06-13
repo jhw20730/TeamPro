@@ -40,19 +40,26 @@ public class ReviewServiceImpl implements ReviewService {
 		mapper.registerReview(reviewVO);
 	}
 
-//	@Override
-//	public int modifyReview(ReviewVO reviewVO) {
-//		return mapper.modifyReview(reviewVO);
-//	}
-//
-//	@Override
-//	public int deleteReview(String reviewNo) {
-//		return mapper.deleteReview(reviewNo);
-//	}
-
 	@Override
 	public PaymentVO checkPayment(String id, String productCode) {
 		return mapper.checkPayment(id, productCode);
 		
+	}
+
+	@Override
+	public void modifyReview(ReviewVO reviewVO) {
+		mapper.modifyReview(reviewVO);
+		
+	}
+
+	@Override
+	public void deleteReview(int reviewNo, String id) {
+		mapper.deleteReview(reviewNo, id);
+		
+	}
+
+	@Override
+	public ReviewVO getReview(int reviewNo) {
+		return mapper.getReview(reviewNo);
 	}
 }

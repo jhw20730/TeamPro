@@ -30,14 +30,19 @@
 		tbl_review(reviewNo, cartNo, productCode, payCode, id, name, content, reviewPoint, reviewDate)
 		values(tbl_review_seq.nextval, #{cartNo}, #{productCode}, #{payCode}, #{id}, #{name}, #{content}, ${reviewPoint}, sysdate)
 	</insert>
-<!-- 	
+	
+	<select id="getReview" resultType="come.team.domain.ReviewVO">
+		select * from TBL_REVIEW where reviewNo = #{reviewNo}
+	</select>
+	
 	<update id="modifyReview">
+		update TBL_REVIEW set content = #{content}, reviewPoint = #{reviewPoint} where reviewNo = #{reviewNo}
 	</update>
 	
 	<delete id="deleteReview">
+		delete from TBL_REVIEW where reviewNo = #{reviewNo} and id = #{id}
 	</delete>
 
- -->
  
  	<select id="checkPayment" resultType="come.team.domain.PaymentVO">
  		select *

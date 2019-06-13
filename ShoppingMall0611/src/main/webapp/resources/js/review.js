@@ -1,5 +1,19 @@
-
 var reviewService = (function() {
+
+	function getReview(param, callback, error) {
+		var reviewNo = param.reviewNo;
+
+		$.getJSON("/reviews/" + reviewNo, function(data) {
+			if (callback) {
+				callback(data);
+			}
+		}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+
+	}
 
 	function getList(param, callback, error) {
 
@@ -33,6 +47,7 @@ var reviewService = (function() {
 	}
 
 	return {
+		getReview : getReview,
 		getList : getList,
 		displayTime : displayTime
 	};
