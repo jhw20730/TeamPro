@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <%@include file="../includes/header.jsp"%>
 
@@ -28,21 +29,32 @@
 						<td><strong>제목</strong></td>
 						<td><strong>날짜</strong></td>
 					</tr>
-					<c:forEach items="${list }" var="inquiry">
+					<c:forEach items="${inquiry }" var="inquiry">
 						<tr>
 							<td>${inquiry.inquiryNo }</td>
 							<td>${inquiry.id }</td>
 							<td>${inquiry.name }</td>
-							<td onclick="location.href='/inquiry/view?inquiryNo=${inquiry.inquiryNo}'">${inquiry.title }</td>
-							<td>${inquiry.inquiryDate }</td>
+							<td	onclick="location.href='/inquiry/view?inquiryNo=${inquiry.inquiryNo}'">${inquiry.title }</td>
+							<td><fmt:formatDate value="${inquiry.inquiryDate }"	pattern="yyyy-MM-dd" /></td>
 						</tr>
+						<c:forEach items="${reply }" var="reply">
+							<c:if test="${reply.inquiryNo == inquiry.inquiryNo }">
+								<tr>
+									<td>&nbsp;&nbsp;〉</td>
+									<td>&nbsp;&nbsp;${reply.id }</td>
+									<td>&nbsp;&nbsp;관리자</td>
+									<td	onclick="location.href='/admin/inquiry/view?replyNo=${reply.replyNo}'">
+									&nbsp;&nbsp;${reply.title }</td>
+									<td>&nbsp;&nbsp;<fmt:formatDate value="${reply.replyDate }" pattern="yyyy-MM-dd" /></td>
+								</tr>
+							</c:if>
+						</c:forEach>
 					</c:forEach>
 				</table>
 			</div>
 
 			<div class="pull-right">
 				<ul class="pagination">
-
 					<c:if test="${pageMaker.prev }">
 						<li class="paginate_button previous"><a
 							href="${pageMaker.startPage - 1 }">Previous</a></li>
@@ -62,13 +74,21 @@
 					</c:if>
 				</ul>
 			</div>
-
+			
 			<form id="pageForm" action="/inquiry/list" method="get">
 				<input type="hidden" name="pageNum"
 					value="${pageMaker.cri.pageNum }"> <input type="hidden"
 					name="amount" value="${pageMaker.cri.amount }">
 			</form>
-
+			<sec:authorize access="isAuthenticated()"> 
+				<button class="btn btn-outline-info" onclick="location.href='/inquiry/registerForm'">글쓰기</button>							
+			</sec:authorize>
+			
+			<sec:authorize access="isAnonymous()">
+				<button class="btn btn-outline-info" onclick="location.href='/customLogin'">글쓰기</button>					
+			</sec:authorize>
+			
+			<!-- <a href="/inquiry/register" role="button" class="btn btn-outline-info">글쓰기</a> -->
 		</div>
 		<!-- end row -->
 	</div>

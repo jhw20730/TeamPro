@@ -20,8 +20,7 @@
 			</div>
 			<!-- /section-title -->
 				<form role="form" action="/member/deletePro" method="post">
-					<!-- param:내장객체, request랑 같음 -->
-					<input type="hidden" name="id" value="${param.id}">
+					<input type="hidden" name="id" value="<sec:authentication property='principal.username'/>">
 					<input type="submit" value="탈퇴">
 					<input type="button" value="취소" onclick="location.href='/member/getMember'">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -30,13 +30,16 @@
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
 						<h3 class="footer-header">My Account</h3>
-						<ul class="list-links">
-							<li><a href="/member/getMember">My Account</a></li> <!-- 회원 정보 조회 -->
-							<li><a href="#">My Cart</a></li> <!--  장바구니 -->
+						<ul class="list-links">			
 							<sec:authorize access="isAuthenticated()">
+								<li><a href="/member/getMember">My Account</a></li> <!-- 회원 정보 조회 -->
+								<li><a href="/cart/cartList">My Cart</a></li> <!--  장바구니 -->
 								<li><a href="/customLogout">Logout</a></li>
 							</sec:authorize>
+							
 							<sec:authorize access="isAnonymous()">
+								<li><a href="/customLogin">My Account</a></li> <!-- 회원 정보 조회 -->
+								<li><a href="/customLogin">My Cart</a></li> <!--  장바구니 -->
 								<li><a href="/customLogin">Login</a></li>
 							</sec:authorize>
 						</ul>
@@ -52,7 +55,7 @@
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
 							<li><a href="/aboutUs">About Us</a></li> <!-- 쇼핑몰 설명 페이지 -->
-							<li><a href="inquiry/list">Inquiry</a></li> <!-- 문의 게시판 페이지 -->
+							<li><a href="/inquiry/list">Inquiry</a></li> <!-- 문의 게시판 페이지 -->
 							<li><a href="#">Shiping Guide</a></li> <!-- 배송 가이드 페이지 -->
 						</ul>
 					</div>

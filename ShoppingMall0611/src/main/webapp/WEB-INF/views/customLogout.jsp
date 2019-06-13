@@ -20,7 +20,7 @@
 			<!-- /section-title -->
 
 			<form role="form" action="/customLogout" method="post">
-					<button class="btn btn-default">로그아웃</button>
+					<button class="btn btn-lg btn-default">로그아웃</button>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
 

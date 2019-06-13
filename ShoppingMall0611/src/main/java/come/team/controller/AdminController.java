@@ -2,6 +2,7 @@ package come.team.controller;
 
 
 import java.security.Principal;
+import java.text.DateFormat;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import come.team.domain.Criteria;
 import come.team.domain.PageDTO;
 import come.team.domain.ProductVO;
+import come.team.service.MemberService;
 import come.team.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,6 +27,7 @@ import lombok.extern.log4j.Log4j;
 public class AdminController {
 	
 	private ProductService productService;
+	private MemberService memberService;
 	
 	@GetMapping("/index") //관리자 index를 관리자용 페이지
 	public void index(Principal principal) {
@@ -88,4 +91,23 @@ public class AdminController {
 		log.info("delete sequence ");
 	}
 	
+	// 관리자가 회원 목록 확인
+		@GetMapping("/memberlist")
+		public void memberlist(Model model) {
+			model.addAttribute("list", memberService.list());
+		}
+//		public ModelAndView memberlist() {
+//			ModelAndView mv = new ModelAndView();
+//			mv.setViewName("admin/memberlist");
+//			mv.addObject("list", memberService.list());
+//			return mv;
+//		}
+		
+		// 관리자가 회원 정보 확인 (DateFormat 전달)
+		@GetMapping("/memberview")
+		public void memberview(Model model, String id) {
+			DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
+			model.addAttribute("mem", memberService.getMember(id));
+			model.addAttribute("format", format);
+		}
 }

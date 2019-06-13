@@ -17,8 +17,9 @@
 		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER, ROLE_ADMIN')"/>
 		<security:access-denied-handler ref="customAccessDenied"/>
 		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
-		<security:logout logout-url="/customLogout" invalidate-session="true"/>
+		<security:logout logout-url="/customLogout" invalidate-session="true"/>	
 		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="JSESSION_ID"/>
+		
 	</security:http>
 	
 	<security:authentication-manager>

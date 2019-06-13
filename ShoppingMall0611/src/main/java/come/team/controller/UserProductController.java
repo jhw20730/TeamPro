@@ -1,24 +1,18 @@
 package come.team.controller;
 
-import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import come.team.domain.Criteria;
 import come.team.domain.PageDTO;
 import come.team.domain.ProductVO;
 
-import come.team.domain.MemberVO;
 
 import come.team.service.ProductService;
 
@@ -51,22 +45,15 @@ public class UserProductController {
 	}
 	
 	@GetMapping("/view")
-	public void view(String productCode, Model model) {
-	
+	public void view(String productCode, Model model, Principal principal) {
+		String id = principal.getName();
 		ProductVO productVO = productService.productView(productCode);
 		Criteria criteria = new Criteria(1, 10);
 		/*List<ReviewVO> reviewList = reviewService.getReviewList(criteria, productCode);*/
 				
 		model.addAttribute("board", productVO);
+		model.addAttribute("id", id);
 		/*model.addAttribute("review", reviewList);*/
 	}
-	
-	//카트담기
-	@PreAuthorize("hasRole{'ROLE_MEMBER'}") //로그인한 멤버만 가능하게끔
-	@GetMapping("/view/addcart")
-	public void addCart() {
-		
-	}
-	
 	
 }

@@ -18,9 +18,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
 	
 	@Override
-	public List<MemberVO> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberVO> list() { //회원 정보 리스트 
+		return mapper.list();
 	}
 
 	@Override
@@ -35,12 +34,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO getMember(String id) {
+	public MemberVO getMember(String id) { //회원 정보 상세 조회
 		return mapper.getMember(id);
 	}
 
 	@Override
-	public void update(MemberVO vo) {
+	public void update(MemberVO vo) { //회원정보 수정
 		mapper.update(vo);
 		
 	}

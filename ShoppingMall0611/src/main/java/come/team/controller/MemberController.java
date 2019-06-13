@@ -2,6 +2,8 @@ package come.team.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,9 +58,12 @@ public class MemberController {
 	
 	// 회원 탈퇴
 	@PostMapping("/deletePro") 
-	public String deleteProcess(@RequestParam("id") String id) {
+	public String deleteProcess(Principal principal, HttpSession session) {
 		log.info("delete start");
+		String id = principal.getName();
 		service.delete(id);
+		
+		session.invalidate();
 		log.info("delete finish");
 		return "redirect:/";
 	}

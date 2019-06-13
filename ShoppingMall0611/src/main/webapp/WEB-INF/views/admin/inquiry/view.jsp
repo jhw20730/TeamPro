@@ -13,31 +13,35 @@
 			<!-- section-title -->
 			<div class="col-md-12">
 				<div class="section-title">
-					<h2 class="title">VIEW INQUIRY</h2>
+					<h2 class="title">VIEW ADMIN REPLY</h2>
 				</div>
 			</div>
 			<!-- /section-title -->
-			<div style="padding: 15px">
-				<table width="500" style="border: 1px; padding:5px;">
-					<tr>
-						<td><b>작성일</b></td>
-						<td>${reply.replyDate }</td>
-					</tr>
-					<tr>
-						<td><b>제목</b></td>
-						<td>${reply.title }</td>
-					</tr>
-					<tr>
-						<td><b>내용</b></td>
-						<td><textarea cols="30">${reply.content } </textarea></td>
-					</tr>
-				</table>
-			</div>
+				<div class="inquiry" style="padding-left: 20px">
+					<c:forEach items="${replyList }" var="replyList"><br>
+						<h5>관리자 답변 내용</h5>
+						<table width="500" style="border: 1px;">
+							<tr>
+								<td><b>작성일</b></td>
+								<td>${replyList.replyDate } </td>
+							</tr>
+							<tr>
+								<td><b>제목</b></td>
+								<td>${replyList.title }</td>
+							</tr>
+							<tr>
+								<td><b>내용</b></td>
+								<td>${replyList.content }</td>
+							</tr>
+						</table>
+					</c:forEach>
+				</div>
+
 		</div>
-		<!-- /row -->
 	</div>
-	<!-- /container -->
+	<!-- /row -->
 </div>
+<!-- /container -->
 <!-- /section -->
 
 

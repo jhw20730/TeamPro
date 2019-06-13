@@ -23,6 +23,8 @@
 					</div>
 					<div id="product-view"></div>
 				</div>
+				
+				<form action="/cart/addCart" method="post">
 				<div class="col-md-6">
 					<div class="product-body">
 						<div class="product-label">
@@ -46,8 +48,6 @@
 							<ul class="size-option">
 								<li><span class="text-uppercase">운영체제:</span></li>
 								<li class="active"><a href="#">${board.os }</a></li>
-
-
 							</ul>
 						</div>
 
@@ -55,38 +55,18 @@
 							<p>
 								<strong>재고</strong>${board.stock }</p>
 								개수 : <input type="number" name="amount" id="amount" size="1"><br><br>
-							<button type="button" class="primary-btn add-to-cart" id="addCart">
-								<i class="fa fa-shopping-cart"></i> 장바구니 담기
-							</button>
 							
-							<script>
-								$("#addCart").on("click", function(e) {
-									e.preventDefault();
-									var productCode = "<c:out value='${board.productCode}'/>";
-									var amount = $("#amount").val();
-									
-									var cart = {
-										amount : amount,	
-										productCode : productCode,
-										/* id : id */
-									};
-
-									$.ajax({
-										url : "/cart/add",
-										type : "post",
-										data : cart,	
-										success : function() {
-											alert("카트 담기 성공");
-											window.location.href = '/cart/list';
-										},
-										error : function() {
-											alert("카트 담기 실패");
-										}
-									});
-								});
-							
+							<input type="hidden" name="productCode" value="${board.productCode }">		
+							<input type="hidden" name="price" value="${board.price }">	
+							<input type="hidden" name="id" value="${id }">	
+							<input type="hidden" name="productName" value="${board.productName }">	
+							<input type="hidden" name="description" value="${board.description } ">		
+							<input type="submit" class="primary-btn add-to-cart" name="addCart" id="addCart" value="장바구니 담기">	
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<!-- <button type="button" class="primary-btn add-to-cart" name="addCart" id="addCart">
+								<i class="fa fa-shopping-cart"></i> 장바구니 담기</button> -->
 								
-							</script>
+											
 							<div class="pull-right">
 								<button class="main-btn icon-btn">
 									<i class="fa fa-heart"></i>
@@ -98,9 +78,12 @@
 									<i class="fa fa-share-alt"></i>
 								</button>
 							</div>
-						</div>
+						</div>	
 					</div>
 				</div>
+				</form>
+				
+				
 				<div class="col-md-12">
 					<div class="product-tab">
 						<ul class="tab-nav">

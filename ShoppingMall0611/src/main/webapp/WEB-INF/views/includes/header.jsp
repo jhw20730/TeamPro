@@ -17,9 +17,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
 
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!-- 	<link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css" /> -->
-
+	<link type="text/css" rel="stylesheet" href="../../../resources/css/bootstrap.min.css" />
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+	
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="../../../resources/css/slick.css" />
 	<link type="text/css" rel="stylesheet" href="../../../resources/css/slick-theme.css" />
@@ -39,7 +39,7 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-<style>
+<!-- <style>
 #headtbl {
 	width: 364px;
 	height: 40px;
@@ -68,7 +68,7 @@
 	width: 150px;
 	vertical-align: middle;
 }
-</style>
+</style> -->
 </head>
 
 	<!-- jQuery Plugins -->
@@ -160,10 +160,23 @@
 							</sec:authorize>
 							<ul class="custom-menu">
 								<li><a href="/member/getMember"><i class="fa fa-user-o"></i> My Account</a></li>
-								<li><a href="#"><i class="fa fa-heart-o"></i> My Cart</a></li>
+								
+								<!-- 로그인되어있으면 cartList로 이동 -->
+								<sec:authorize access="isAuthenticated()">
+								<li><a href="/cart/cartList"><i class="fa fa-heart-o"></i> My Cart</a></li>
+								</sec:authorize>
+								
+								<!-- 로그인이 안되어있으면 로그인 화면으로 이동 -->
+								<sec:authorize access="isAnonymous()">
+								<li><a href="/customLogin"><i class="fa fa-heart-o"></i> My Cart</a></li>
+								</sec:authorize>
+								
+								<!-- 로그인이 되어있으면 로그아웃이라고 나오고, 누르면 로그아웃 페이지로 이동 -->
 								<sec:authorize access="isAuthenticated()">
 									<li><a href="/customLogout"><i class="fa fa-unlock-alt"></i> Logout</a></li>
 								</sec:authorize>
+								
+								<!-- 로그인이 안되어있으면 로그인이라고 나오고, 누르면 로그인 페이지로 이동 -->
 								<sec:authorize access="isAnonymous()">
 									<li><a href="/customLogin"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								</sec:authorize>
@@ -183,6 +196,7 @@
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
 										<!-- product widget -->
+										
 										<div class="product product-widget">
 											<div class="product-thumb">
 												<img src="" alt="">

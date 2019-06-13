@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-    
+
 <%@include file="../includes/header.jsp"%>
 <style>
 table {
 	border: 1px solid black;
 	width: 60%;
 	margin: 0 auto;
+	font-size: 160%;
 }
 
 tr {
@@ -19,12 +19,12 @@ tr {
 td {
 	border: 1px solid black;
 	margin: 10px;
-	padding: 20px 10px 10px 10px;
+	padding-top: 10px;
 }
-#href{
-	font-size: 160%;
-	color: #345def;
+
+#id{
 	text-decoration: underline;
+	color: #345ddd;
 }
 </style>
 <!-- section -->
@@ -36,33 +36,23 @@ td {
 			<!-- section-title -->
 			<div class="col-md-12">
 				<div class="section-title">
-					<h2 class="title">
-						관리자 화면
-					</h2>
+					<h2 class="title">MEMBER LIST(ADMIN)</h2>
 				</div>
 			</div>
 
-			<h2><sec:authentication property="principal.user.name"/>님입니다.</h2><br>
 			<table>
 				<tr>
-					<td><h2>상품정보</h2></td>
-					<td><a id="href" href="/admin/list">상품 정보 확인</a></td>
+					<td><h3>ID</h3></td>
+					<td><h3>NAME</h3></td>
 				</tr>
-				<tr>
-					<td><h2>회원정보</h2></td>
-					<td><a id="href" href="/admin/memberlist">회원 정보 확인</a></td>
-				</tr>
-				<tr>
-					<td><h2>결제정보</h2></td>
-					<td><a id="href" href="/admin/list">결제 정보 확인</a></td>
-				</tr>
-				<tr>
-					<td><h2>문의사항</h2></td>
-					<td><a id="href" href="/inquiry/list">문의사항 테이블로</a></td>
-				</tr>
-		
+				<c:forEach var="mem" items="${list }">
+					<tr>
+						<td><a id="id" href="/admin/memberview?id=${mem.id}">${mem.id }</a></td>
+						<td>${mem.name }</td>
+					</tr>
+				</c:forEach>
 			</table>
-						
+
 		</div>
 		<!-- /row -->
 
@@ -72,4 +62,5 @@ td {
 
 </div>
 <!-- /section -->
+
 <%@include file="../includes/footer.jsp"%>
