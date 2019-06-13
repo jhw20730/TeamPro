@@ -46,10 +46,10 @@ public class UserProductController {
 	public void view(String productCode, Model model) {
 	
 		ProductVO productVO = productService.productView(productCode);
-		Criteria criteria = new Criteria(1, 10);
-		List<ReviewVO> reviewList = reviewService.getReviewList(criteria, productCode);
+		//Criteria criteria = new Criteria(1, 3);
+		//List<ReviewVO> reviewList = reviewService.getReviewList(criteria, productCode);
 		model.addAttribute("board", productVO);
-		model.addAttribute("review", reviewList);	
+		//model.addAttribute("review", reviewList);	
 	}
 	
 	//카트담기

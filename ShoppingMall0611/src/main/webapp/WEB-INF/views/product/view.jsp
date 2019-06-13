@@ -151,28 +151,27 @@
 											<sec:authorize access="isAuthenticated()">
 												<button id="submitReview" class="primary-btn">Submit</button>
 											</sec:authorize>
-											
-											<sec:authorize access="isAnonymous()">
-												<button onclick="location.href='/customLogin'" class="primary-btn">Submit</button>
-											</sec:authorize>
-											
 										</form>
-										
+											<sec:authorize access="isAnonymous()">
+												<button onclick="location.href='/customLogin'" class="btn btn-warning">Submit</button>
+											</sec:authorize>									
 										<script>
 											$("#submitReview").on("click", function(){
 												$.ajax({
 													url : "/reviews/register",
 													type : "post",
 													data : (".review-form").serialize(),
-													success : function(){
+													success : function() {
 														alert("리뷰를 작성하셨습니다.");
+														window.location.replace ="view?productCode=" + productCode;
 													},
-													error : function(){
+													error : function() {
 														alert("error");
 													}
 												});
 											});
 										</script>
+										
 									
 									</div>
 								</div>

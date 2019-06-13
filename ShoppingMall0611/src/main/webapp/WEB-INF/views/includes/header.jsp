@@ -160,25 +160,28 @@
 						<!-- /Account -->
 
 						<!-- Cart -->
+						
+						<sec:authorize access="isAuthenticated()">
 						<li class="header-cart dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-								<strong class="text-uppercase">My Cart:</strong>
+								<strong class="text-uppercase">My Cart <i class="fa fa-caret-down"></i></strong>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
 										<!-- product widget -->
-
 										<!-- end widget -->
 									</div>
-									<div class="shopping-cart-btns">
-										<button class="main-btn" onclick="location.href='/cart/list'">View Cart</button>
-										<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
-									</div>
+										<div class="shopping-cart-btns">
+											<button class="main-btn" onclick="location.href='/cart/list'">View Cart</button>
+											<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										</div>									
+									
 								</div>
 							</div>
 						</li>
 						<!-- /Cart -->
+						</sec:authorize>
 					</ul>
 				</div>
 			</div>
@@ -245,8 +248,4 @@
 		<!-- container -->
 	</header>
 	<!-- /HEADER -->
-	
-	
-	<script type="text/javascript">
-	</script>
 	

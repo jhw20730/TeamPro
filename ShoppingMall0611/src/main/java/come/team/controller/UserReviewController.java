@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import come.team.domain.Criteria;
@@ -32,6 +33,7 @@ public class UserReviewController {
 	private ReviewService reviewService;
 	private MemberService memberService;
 	
+	@ResponseBody	
 	@GetMapping(value = "/{productCode}/{page}",
 		produces = {
 				MediaType.APPLICATION_XML_VALUE,
@@ -45,6 +47,7 @@ public class UserReviewController {
 		return new ResponseEntity<ReviewPageDTO>(reviewService.getReviewListPage(criteria, productCode), HttpStatus.OK);
 	}
 	
+	@ResponseBody
 	@PreAuthorize("hasRole{'ROLE_MEMBER'}")
 	@PostMapping("/register")
 	public void registerReview(Principal principal, ReviewVO reviewVO) {
