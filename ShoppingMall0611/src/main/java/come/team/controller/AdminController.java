@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@PreAuthorize("hasRole{'ROLE_ADMIN'}")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/admin")
 @AllArgsConstructor
 public class AdminController {

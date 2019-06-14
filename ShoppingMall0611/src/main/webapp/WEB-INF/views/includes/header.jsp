@@ -100,6 +100,7 @@
 				</div>
 				<div class="pull-right">
 					<ul class="header-top-links">
+						<li><a href="/notice/list">Notice</a></li>
 						<li><a href="/product/list">Store</a></li>
 						<li><a href="/inquiry/list">Inquiry</a></li>
 					</ul>

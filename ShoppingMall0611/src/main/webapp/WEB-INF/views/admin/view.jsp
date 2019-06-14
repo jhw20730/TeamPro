@@ -22,14 +22,9 @@ td {
 	border: 1px solid black;
 }
 
-a {
-	text-decoration: underline;
-	color: blue;
-}
-
 #btns {
 	display: block;
-	width: 290px;
+	width: 300px;
 	margin: 0 auto;
 	margin-top: 15px;
 }
