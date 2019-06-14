@@ -57,8 +57,10 @@
 								개수 : <input type="number" name="amount" id="amount" size="1"><br><br>
 							
 							<input type="hidden" name="productCode" value="${board.productCode }">		
-							<input type="hidden" name="price" value="${board.price }">	
+							<input type="hidden" name="price" value="${board.price }">
+							<sec:authorize access="isAuthenticated()">	
 							<input type="hidden" name="id" value="<sec:authentication property='principal.username'/>">	
+							</sec:authorize>
 							<input type="hidden" name="productName" value="${board.productName }">	
 							<input type="hidden" name="description" value="${board.description } ">		
 							<input type="submit" class="primary-btn add-to-cart" name="addCart" id="addCart" value="장바구니 담기">	
@@ -82,8 +84,7 @@
 					</div>
 				</div>
 				</form>
-				
-				
+					
 				<div class="col-md-12">
 					<div class="product-tab">
 						<ul class="tab-nav">

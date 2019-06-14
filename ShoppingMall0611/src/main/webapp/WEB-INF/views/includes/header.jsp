@@ -158,26 +158,18 @@
 									<b><sec:authentication property="principal.username"/>님</b><br> <!-- username means id -->
 									<a href="/customLogout" class="text-uppercase">Logout</a>
 							</sec:authorize>
-							<ul class="custom-menu">
-								<li><a href="/member/getMember"><i class="fa fa-user-o"></i> My Account</a></li>
-								
-								<!-- 로그인되어있으면 cartList로 이동 -->
+							<ul class="custom-menu">								
+								<!-- 로그인되어있으면 -->
 								<sec:authorize access="isAuthenticated()">
-								<li><a href="/cart/cartList"><i class="fa fa-heart-o"></i> My Cart</a></li>
-								</sec:authorize>
-								
-								<!-- 로그인이 안되어있으면 로그인 화면으로 이동 -->
-								<sec:authorize access="isAnonymous()">
-								<li><a href="/customLogin"><i class="fa fa-heart-o"></i> My Cart</a></li>
-								</sec:authorize>
-								
-								<!-- 로그인이 되어있으면 로그아웃이라고 나오고, 누르면 로그아웃 페이지로 이동 -->
-								<sec:authorize access="isAuthenticated()">
+									<li><a href="/member/getMember"><i class="fa fa-user-o"></i> My Account</a></li>
+									<li><a href="/cart/cartList"><i class="fa fa-heart-o"></i> My Cart</a></li>
 									<li><a href="/customLogout"><i class="fa fa-unlock-alt"></i> Logout</a></li>
 								</sec:authorize>
 								
-								<!-- 로그인이 안되어있으면 로그인이라고 나오고, 누르면 로그인 페이지로 이동 -->
+								<!-- 로그인이 안되어있으면 -->
 								<sec:authorize access="isAnonymous()">
+									<li><a href="/customLogin"><i class="fa fa-user-o"></i> My Account</a></li>
+									<li><a href="/customLogin"><i class="fa fa-heart-o"></i> My Cart</a></li>
 									<li><a href="/customLogin"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								</sec:authorize>
 								<li><a href="/join"><i class="fa fa-user-plus"></i> Create An Account</a></li>
