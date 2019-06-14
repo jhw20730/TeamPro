@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="../includes/header.jsp"%>
 
@@ -16,7 +17,7 @@
 				</div>
 			</div>
 			
-			
+			<div id="content-bd">
 			<form role="form" action="/notice/register" method="post">
 				<div class="form-group">
 					<label>ID</label>
@@ -31,13 +32,14 @@
 				
 				<div class="form-group">
 					<label>CONTENT</label><br>
-					<textarea cols="150" rows="10" name='content'></textarea>
+					<textarea cols="156" rows="10" name='content'></textarea>
 				</div>
 				
 				<button type="submit" class="btn btn-default">등록</button>
 				<button type="reset" class="btn btn-default">RESET</button>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
+			</div>
 		</div>
 	</div>
 </div>

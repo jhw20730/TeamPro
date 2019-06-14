@@ -2,15 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="includes/header.jsp"%>
 
 <style>
-#explain{
-margin: 100px 0px 40px 40px;
-}
 #map {
-height: 40%;
+width:500px;
+height:400px;
 }
 section{
 margin-left: 655px;
@@ -27,7 +26,7 @@ margin-top: -400px;
 				</div>
 			</div>
 			
-			<div id="explain">
+			<div id="content-bd">
 				저희 쇼핑몰은 PC와 PC 주변기기를 판매하는 온라인 거래 웹 사이트입니다.<br>
 				데스크탑, 노트북, 모니터 등의 기기를 그 어느 곳보다 좋은 품질과 가격으로 구매할 수 있습니다.<br>
 				고객의 요구에 맞는 기기를 검색하고 구매할 수 있습니다.<br>
@@ -37,7 +36,7 @@ margin-top: -400px;
 			</div>
 			
 			<section>
-				<div id="map" style="width:500px;height:400px;"></div>
+				<div id="map"></div>
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54974f1dbe52b46cc9118c640f479834"></script>
 				<script>
 				var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

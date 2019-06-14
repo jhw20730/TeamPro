@@ -7,7 +7,7 @@
 
 <style>
 #explain{
-margin: 100px 0px 40px 40px;
+margin: 70px 0px 40px 40px;
 font-size: 120%;
 }
 img{

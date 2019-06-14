@@ -2,28 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="../includes/header.jsp"%>
 <style>
 table {
-	border: 1px solid black;
 	width: 60%;
-	margin: 0 auto;
-}
-
-tr {
-	border: 1px solid black;
-	text-align: center;
-}
-
-td {
-	margin: 10px;
-	padding-top: 10px;
-}
-
-button {
-	margin: 0 auto;
-	font-size: 70%;
 }
 </style>
 
@@ -38,7 +22,7 @@ button {
 				<div class="section-title">
 					<h2 class="title">
 						PRODUCT LIST(ADMIN)
-						<button onclick="location.href='/admin/register'">상품 등록</button>
+						<button id="btns_2" onclick="location.href='/admin/register'">상품 등록</button>
 					</h2>
 				</div>
 			</div>

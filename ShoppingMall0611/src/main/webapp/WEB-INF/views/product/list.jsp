@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" /> -->
 
 <%@include file="../includes/header.jsp"%>
 
@@ -18,10 +19,10 @@
 				</div>
 			</div>
 			<!-- /section-title -->
-
+					
 			<!-- Product Single -->
 			<c:forEach items="${list }" var="product">
-				<div class="product product-single" style="display:inline; float:left; width:50%">
+				<div class="product product-single" style="display:inline; float:left; width:50%; height:210px; padding-left:25px;">
 					<div class="product-thumb">
 						<div class="product-label">
 							<span><c:out value="${product.productCode }" /></span>
@@ -53,7 +54,6 @@
 				</div>
 			</c:forEach>
 			<!-- /Product Single -->
-
 			<div class="pull-right">
 				<ul class="pagination">
 

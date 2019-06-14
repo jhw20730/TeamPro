@@ -2,33 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="../includes/header.jsp"%>
 
-<style>
-table {
-	border: 1px solid black;
-	width: 60%;
-	margin: 0 auto;
-}
-
-tr {
-	text-align: center;
-}
-
-td {
-	border: 1px solid black;
-	margin: 10px;
-	padding-top: 10px;
-}
-#btns {
-	display: block;
-	width: 212px;
-	margin: 0 auto;
-	margin-top: 15px;
-	font-size: 110%;
-}
-</style>
 
 <div class="section">
 	<div class="container">
@@ -39,7 +16,7 @@ td {
 				</div>
 			</div>
 
-			<table>
+			<table style="padding: 7px 25px 7px 25px;">
 				<tr>
 					<td>${no.noticeNo }</td>
 					<td>${no.id }</td>
@@ -54,7 +31,7 @@ td {
 					<td colspan='2'>${format.format(no.noticeDate) }</td>
 				</tr>
 			</table>
-			<div id="btns">
+			<div id="btns_1">
 				<button
 					onclick="location.href='/notice/updateForm?noticeNo=${no.noticeNo}'">
 					<b>update</b>

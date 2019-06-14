@@ -2,20 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="../includes/header.jsp"%>
 <style>
-table {
-	text-align: center;
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-td {
-	border: 1px solid black;
-	margin: 10px;
-	padding-top: 10px;
-}
 button {
 	display: block;
 	margin: 0 auto;

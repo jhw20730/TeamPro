@@ -3,30 +3,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="../includes/header.jsp"%>
 <style>
 table {
-	border: 1px solid black;
 	width: 80%;
-	margin: 0 auto;
-	text-align: center;
 	height: 500px;
 }
 
 tr {
 	padding: 20px;
-}
-
-td {
-	border: 1px solid black;
-}
-
-#btns {
-	display: block;
-	width: 300px;
-	margin: 0 auto;
-	margin-top: 15px;
 }
 </style>
 
@@ -78,7 +65,7 @@ td {
 					<td><h3>${product.usability }</h3></td>
 				</tr>
 			</table>
-			<div id="btns">
+			<div id="btns_3">
 				<button
 					onclick="location.href='/admin/update?productCode=${product.productCode}'">
 					<h3>update</h3>

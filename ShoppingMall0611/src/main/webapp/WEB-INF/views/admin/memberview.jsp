@@ -2,14 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
 
 <%@include file="../includes/header.jsp"%>
 <style>
 table {
-	border: 1px solid black;
 	width: 80%;
-	margin: 0 auto;
-	text-align: center;
 	height: 500px;
 	font-size: 150%;
 	font-weight: bold;
@@ -18,12 +16,6 @@ table {
 tr {
 	padding: 20px;
 }
-
-td {
-	border: 1px solid black;
-}
-
-
 </style>
 
 <!-- section -->

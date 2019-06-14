@@ -3,28 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" />
     
 <%@include file="../includes/header.jsp"%>
 <style>
 table {
-	border: 1px solid black;
 	width: 60%;
-	margin: 0 auto;
-}
-
-tr {
-	text-align: center;
 }
 
 td {
-	border: 1px solid black;
-	margin: 10px;
 	padding: 20px 10px 10px 10px;
-}
-#href{
-	font-size: 160%;
-	color: #345def;
-	text-decoration: underline;
 }
 </style>
 <!-- section -->
@@ -41,24 +29,24 @@ td {
 					</h2>
 				</div>
 			</div>
-
-			<h2><sec:authentication property="principal.user.name"/>님입니다.</h2><br>
+			
+			<h2 id="content_bd"><sec:authentication property="principal.user.name"/>님입니다.</h2><br>
 			<table>
 				<tr>
 					<td><h2>상품정보</h2></td>
-					<td><a id="href" href="/admin/list">상품 정보 확인</a></td>
+					<td><a id="admin_href" href="/admin/list">상품 정보 확인</a></td>
 				</tr>
 				<tr>
 					<td><h2>회원정보</h2></td>
-					<td><a id="href" href="/admin/memberlist">회원 정보 확인</a></td>
+					<td><a id="admin_href" href="/admin/memberlist">회원 정보 확인</a></td>
 				</tr>
 				<tr>
 					<td><h2>결제정보</h2></td>
-					<td><a id="href" href="/admin/list">결제 정보 확인</a></td>
+					<td><a id="admin_href" href="/admin/list">결제 정보 확인</a></td>
 				</tr>
 				<tr>
 					<td><h2>문의사항</h2></td>
-					<td><a id="href" href="/inquiry/list">문의사항 테이블로</a></td>
+					<td><a id="admin_href" href="/inquiry/list">문의사항 테이블로</a></td>
 				</tr>
 		
 			</table>
