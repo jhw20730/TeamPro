@@ -18,6 +18,8 @@ public interface InquiryMapper {
 	
 	public void registerInquiry(InquiryVO inquiryVO);
 	
-	public void deleteInquiry();
+	public void deleteInquiry(int inquiryNo);		//게시글 삭제
+	
+	public void modifyInquiry(InquiryVO inquiryVO);		//게시글 수정
 
 }

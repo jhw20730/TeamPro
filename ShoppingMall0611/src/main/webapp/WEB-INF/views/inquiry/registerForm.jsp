@@ -40,7 +40,7 @@
 						</div>
 						<input type="hidden" name="id" value="<sec:authentication property='principal.username'/>"> 
 						<input type="submit" class="btn btn-info" value="등록하기">
-						<button onclick="location.href='/inquiry/list'"	class="btn btn-secondary">목록으로</button>
+						<button onclick="location.href='/inquiry/list'"	class="btn btn-info">목록으로</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</div>

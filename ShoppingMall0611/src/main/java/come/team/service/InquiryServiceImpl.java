@@ -33,15 +33,25 @@ public class InquiryServiceImpl implements InquiryService {
 	public InquiryVO getInquiryView(int inquiryNo) {
 		return mapper.getInquiryView(inquiryNo);
 	}
+	
 	//게시물 작성
 	@Override
 	public void registerInquiry(InquiryVO inquiryVO) {
 		mapper.registerInquiry(inquiryVO);
 	}
 
+	// 게시물 수정
 	@Override
-	public void deleteInquiry() {
-		mapper.deleteInquiry();
+	public void modifyInquiry(InquiryVO inquiryVO) {
+		mapper.modifyInquiry(inquiryVO);
+		
+	}
+
+	//게시글 삭제
+	@Override
+	public void deleteInquiry(int inquiryNo) {
+		mapper.deleteInquiry(inquiryNo);
+
 	}
 
 

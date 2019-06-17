@@ -72,9 +72,44 @@ public class InquiryController {
 		return "redirect:/inquiry/list";
 	}
 	
-	@DeleteMapping("/delete")
-	public void deleteInquiry() {
+	//게시물 삭제
+	@PreAuthorize("principal.username == #id)")
+	@GetMapping("/delete")
+	public String getdeleteInquiry(int inquiryNo, Model model) {
+		log.warn("접속"); 
+		log.warn(inquiryNo);
+		log.warn(model);		
+			
+		model.addAttribute("delete", inquiryNo);
+		log.info("delete start");
+		inquiryService.deleteInquiry(inquiryNo);
+		log.info("delete finish");
+		return "redirect:/inquiry/list";
+	}
+	
+	
+	//게시물 수정 페이지로 매핑
+	@PreAuthorize("principal.username == #id")
+	@GetMapping("/modifyForm")
+	public void getModifyInquiry(int inquiryNo, Model model) {
+		log.warn("=======================");
+		log.warn(inquiryNo);
+		model.addAttribute("inquiry", inquiryService.getInquiryView(inquiryNo));
 		
+	}
+		
+	//게시물 수정
+	@PreAuthorize("principal.username == #id")
+	@PostMapping("/modifyUpdate")
+	public String postModifyInquiry(InquiryVO inquiryVO, Model model) {
+			
+		log.warn("수정되었습니다.");
+		log.warn("-----------");
+
+		model.addAttribute("inquiry", inquiryVO);
+		inquiryService.modifyInquiry(inquiryVO);
+			
+		return "redirect:/inquiry/list";
 	}
 
 }

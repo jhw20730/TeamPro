@@ -28,6 +28,15 @@
 		values (tbl_inquiry_seq.nextval, #{id}, #{name}, #{title}, #{content})
 	</insert>
 	
-	<delete id="deleteInquiry" />
+	<!-- 	게시글 삭제 -->
+	<delete id="deleteInquiry" >
+		delete from tbl_inquiry where inquiryNo = #{inquiryNo}
+	</delete>
+	
+	<!-- 	게시물 수정 -->
+	<update id="modifyInquiry">
+		update tbl_inquiry set content = #{content} 
+		where inquiryNo = #{inquiryNo}
+	</update>
 	
 </mapper>

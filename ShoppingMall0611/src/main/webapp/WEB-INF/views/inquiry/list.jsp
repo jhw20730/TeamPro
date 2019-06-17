@@ -80,8 +80,10 @@
 					value="${pageMaker.cri.pageNum }"> <input type="hidden"
 					name="amount" value="${pageMaker.cri.amount }">
 			</form>
+			
 			<sec:authorize access="isAuthenticated()"> 
-				<button class="btn btn-outline-info" onclick="location.href='/inquiry/registerForm'">글쓰기</button>							
+				<button class="btn btn-outline-info" onclick="location.href='/inquiry/registerForm'">글쓰기</button>
+											
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
