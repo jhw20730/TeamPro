@@ -83,9 +83,6 @@
 				<button type="button" class="selectDelete_btn">선택 삭제</button>
 				<script>
 						$(document).ready(function(e) {
-							var csrfHeaderName = "${_csrf.parameterName}";
-							var csrfTokenName = "${_csrf.token}";
-							
 							$(".selectDelete_btn").click(function() {
 								var confirm_val = confirm("정말 삭제하시겠습니까?");
 
@@ -102,8 +99,8 @@
 										data : {
 											chbox : checkArr
 										},
-										beforeSend : function(xhr) {
-											xhr.setRequestHeader(csrfHeaderName, csrfTokenName);
+										beforeSend : function(xhr) { //csrf token값 보내기
+											xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 										},
 										success : function() {
 											alert("삭제 성공");
@@ -118,39 +115,7 @@
 					
 						});	
 				
-						/* $(".selectDelete_btn").click(function() {
-						var csrfHeaderName = "${_csrf.parameterName}";
-						var csrfTokenName = "${_csrf.token}";
-						
-						var confirm_val = confirm("정말 삭제하시겠습니까?");
-
-						if (confirm_val) {
-							var checkArr = new Array();
-
-							$("input[class='chBox']:checked").each(function() {
-								checkArr.push($(this).attr("data-cartNum"));
-							});
-
-							$.ajax({
-								url : "/cart/deleteCart",
-								type : "post",
-								data : {
-									chbox : checkArr
-								},
-								beforeSend : function(xhr) {
-									xhr.setRequestHeader(csrfHeaderName, csrfTokenName);
-								},
-								success : function() {
-									alert("삭제 성공");
-										location.href = "/cart/cartList";
-								},
-								error : function(){
-									alert("삭제 실패");
-								}
-							});
-						}
-					}); 
- */				</script>
+				</script>
 			</div>
 		</div>
 	</div>
