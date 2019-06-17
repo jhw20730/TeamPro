@@ -9,7 +9,7 @@ public class ReviewVO {
 	int reviewNo; //seq
 	int cartNo; 
 	String productCode; //form
-	String payCode; 
+	int payNo; 
 	String id; //principal로 가져오기
 	String name; //principal -> getMember -> getName
 	String content; //form

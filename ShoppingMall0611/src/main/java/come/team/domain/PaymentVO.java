@@ -7,10 +7,11 @@ import lombok.Data;
 @Data
 public class PaymentVO {
 	
-	String payCode;
+	int payNo;
 	int cartNo;
 	String id;
 	String productCode;
+	String name;
 	int amount;
 	String address;
 	Date payDate;

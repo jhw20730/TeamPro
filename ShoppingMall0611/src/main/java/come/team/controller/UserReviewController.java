@@ -57,7 +57,7 @@ public class UserReviewController {
 		PaymentVO paymentVO = reviewService.checkPayment(reviewVO.getId(), reviewVO.getProductCode());
 		
 		reviewVO.setCartNo(paymentVO.getCartNo());
-		reviewVO.setPayCode(paymentVO.getPayCode());
+		reviewVO.setPayNo(paymentVO.getPayNo());
 		
 		reviewService.registerReview(reviewVO);
 		log.info("registered " + reviewVO);
