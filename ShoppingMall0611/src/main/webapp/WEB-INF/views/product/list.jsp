@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!-- <link type="text/css" rel="stylesheet" href="../../../resources/css/add_table.css" /> -->
 
 <%@include file="../includes/header.jsp"%>
@@ -35,8 +36,7 @@
 					</div>
 					<div class="product-body">
 						<h3 class="product-price">
-							<c:out value="${product.price }" />
-							원
+							<fmt:formatNumber pattern="###,###,###" value="${product.price }"/>원
 						</h3>
 						<h2 class="product-name">
 							<a href="#"> <c:out value="${product.productName }" />
@@ -46,9 +46,17 @@
 							<c:out value="${product.description }" />
 						</h4>
 						<div class="product-btns">
-							<button class="primary-btn add-to-cart">
+							<sec:authorize access="isAuthenticated()">
+								<button class="primary-btn add-to-cart" onclick="location.href='view?productCode=${product.productCode }'">
 								<i class="fa fa-shopping-cart"></i> Add to Cart
 							</button>
+							</sec:authorize>
+							
+							<sec:authorize access="isAnonymous()">
+								<button class="primary-btn add-to-cart" onclick="location.href='/customLogin'">
+								<i class="fa fa-shopping-cart"></i> Add to Cart
+							</button>
+							</sec:authorize>
 						</div>
 					</div>
 				</div>

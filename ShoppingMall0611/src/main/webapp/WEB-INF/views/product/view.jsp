@@ -31,7 +31,7 @@
 							<span>${board.productCode }</span>
 						</div>
 						<h2 class="product-name">${board.productName }</h2>
-						<h3 class="product-price">${board.price }</h3>
+						<h3 class="product-price"><fmt:formatNumber pattern="###,###,###" value="${board.price }"/>원</h3>
 						<div>
 							<div class="product-rating">
 								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -63,7 +63,14 @@
 							</sec:authorize>
 							<input type="hidden" name="productName" value="${board.productName }">	
 							<input type="hidden" name="description" value="${board.description } ">		
-							<input type="submit" class="primary-btn add-to-cart" name="addCart" id="addCart" value="장바구니 담기">	
+							<sec:authorize access="isAuthenticated()">
+								<input type="submit" class="primary-btn add-to-cart" name="addCart" id="addCart" value="장바구니 담기">
+							</sec:authorize>
+							<sec:authorize access="isAnonymous()">
+								<input type="button" class="primary-btn add-to-cart" name="addCart" id="addCart" 
+								onclick="location.href='/customLogin'" value="장바구니 담기">
+							</sec:authorize>
+							<!-- <input type="submit" class="primary-btn add-to-cart" name="addCart" id="addCart" value="장바구니 담기"> -->	
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<!-- <button type="button" class="primary-btn add-to-cart" name="addCart" id="addCart">
 								<i class="fa fa-shopping-cart"></i> 장바구니 담기</button> -->
