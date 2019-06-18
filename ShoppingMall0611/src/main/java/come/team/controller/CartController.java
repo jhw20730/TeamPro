@@ -101,6 +101,7 @@ public class CartController {
 	public String orderInput(PaymentVO payment, PaymentDetailVO paymentDetail) {
 		log.info("start orderInput");
 		orderService.orderInput(payment);
+		
 		/*orderService.orderDetailInput(paymentDetail);*/
 		log.info("finish orderInput");
 		return "redirect:/";  // 주문 내역 확인 페이지로 이동
