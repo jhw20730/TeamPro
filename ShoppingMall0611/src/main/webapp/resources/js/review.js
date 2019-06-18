@@ -1,10 +1,36 @@
 var reviewService = (function() {
+	
+	function modify(reviewVO, callback, error){
+		console.log("reviewService.modify...");
+		$.ajax({
+			url : "/reviews/modify/" + reviewVO.reviewNo,
+			type : "put",
+			data : JSON.stringify(reviewVO),
+			contentType : "application/json; charset=utf-8",
+			headers: {"X-CSRF-TOKEN": $("input[name='_csrf']").val()},
+  //          beforeSend : function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+//                xhr.setRequestHeader("Accept", "application/json");
+               // xhr.setRequestHeader("content-Type", "application/json");
+              //  xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            //},
+			success : function() {
+				alert("리뷰 수정 성공");
+				modal.style.display = "none";
+				showList(1);
+			},
+			error : function(xhr, status, er) {
+				alert(er);
+			}
+		});
+	}
 
-	function getReview(param, callback, error) {
-		var reviewNo = param.reviewNo;
+	function getReview(reviewNo, callback, error) {
+		console.log(reviewNo);
 
 		$.getJSON("/reviews/" + reviewNo, function(data) {
 			if (callback) {
+				console.log("callback...");
+				console.log(data);
 				callback(data);
 			}
 		}).fail(function(xhr, status, err) {
@@ -49,6 +75,7 @@ var reviewService = (function() {
 	return {
 		getReview : getReview,
 		getList : getList,
-		displayTime : displayTime
+		displayTime : displayTime,
+		modify : modify
 	};
 })();

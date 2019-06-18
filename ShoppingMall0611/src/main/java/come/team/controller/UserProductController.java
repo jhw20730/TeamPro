@@ -1,6 +1,6 @@
 package come.team.controller;
 
-import java.util.List;
+import java.security.Principal;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import come.team.domain.Criteria;
 import come.team.domain.PageDTO;
 import come.team.domain.ProductVO;
-import come.team.domain.ReviewVO;
 import come.team.service.ProductService;
 import come.team.service.ReviewService;
 import lombok.AllArgsConstructor;
@@ -43,10 +42,17 @@ public class UserProductController {
 	}
 	
 	@GetMapping("/view")
-	public void view(String productCode, Model model) {
+	public void view(String productCode, Model model, Principal principal) {
 	
 		ProductVO productVO = productService.productView(productCode);
 		model.addAttribute("board", productVO);
+		
+		try {
+			String id = principal.getName();
+			model.addAttribute("id", id);
+		} catch (Exception e) {
+
+		}
 		
 	}
 	

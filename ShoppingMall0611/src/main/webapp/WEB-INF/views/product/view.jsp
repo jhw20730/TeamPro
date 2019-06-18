@@ -131,8 +131,6 @@
 									</div>
 								</div>
 
-
-
 							</div>
 						</div>
 					</div>
@@ -147,101 +145,105 @@
 </div>
 <!-- /section -->
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title"></h4>
-			</div> <!-- /modal-header -->
-			<div class="modal-body">
-			
-			</div> <!-- /modal-body -->
-			<div class="modal-footer">
-				<button id="modalModifyBtn" class="btn btn-warning">Modify</button>
-				<button id="modalDeleteBtn" class="btn btn-danger">Delete</button>
-				<button id="modalCloseBtn" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-			</div> <!-- /modal-footer -->
-		</div> <!-- /modal-content -->
-	</div> <!-- /modal-dialog -->
-</div> <!-- /Modal -->
-
+<!-- Modal Style -->
 <style>
-  /* The Modal (background) */
-  .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+body {font-family: Arial, Helvetica, sans-serif;}
 
-  /* Modal Content/Box */
-  .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto; /* 15% from the top and centered */
-      padding: 20px;
-      border: 1px solid #888;
-      width: 90%; /* Could be more or less, depending on screen size */                          
-  }
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  color: white;
+}
 </style>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modify Review</h2>
+    </div>
+    <div class="modal-body" id="modal-body">
+    </div>
+    <div class="modal-footer">
+      <button id="cancleBtn" class="btn btn-danger">Cancle</button>
+      <button id="modifyBtn" class="btn btn-warning">Modify</button>
+    </div>
+  </div>
+
+</div>
 
 <script type="text/javascript" src="../../../resources/js/review.js"></script>
 
-<!-- 리뷰 등록 스크립트 -->
-<script type="text/javascript">
-$("#submitReview").on("click",function(e) {
-	e.preventDefault();
 
-	var reviewVO = $("form[name=review-form]").serialize();
-
-	$.ajax({
-		url : "/reviews/register",
-		type : "post",
-		data : reviewVO,
-		success : function() {
-			alert("리뷰를 작성하셨습니다.");
-			window.location.href = "view?productCode=<c:out value='${board.productCode}'/>";
-		},
-		error : function() {
-			alert("구매한 상품에만 리뷰를 작성하실 수 있습니다.");
-		}
-	});
-});
-</script>
-
-<!-- 리뷰 상세 조회 스크립트 -->
-<script type="text/javascript">
-function viewReview(reviewNo){
-	
-	console.log("viewReview...");
-	
-	var modalBody = $(".modal-body");
-	var modalTitle = $(".modal-title");
-	
-	modalTitle.html("View Review");
-	
-	var str = "";
-	
-	reviewService.getReview({reviewNo : reviewNo}, function(reviewVO){
-		str += "<div class='modal-group'>";
-		str += "<p>modal</p>";
-		str += "</div>";
-	}); //end reviewService.getReview function
-	
-	modalBody.html(str);
-	
-	$("#myModal").show();
-} //end viewReview
-
-</script>
+<!-- id값 가져오기 -->
+<sec:authorize access="isAuthenticated()">
+	<input type="hidden" value="<sec:authentication property="principal.username" />" id="username">
+</sec:authorize>
 
 <!-- 리뷰 리스트 조회 스크립트 -->
 <script type="text/javascript">
@@ -252,7 +254,9 @@ $(document)
 				//review
 				var productCode = $("#productCode").val();
 				var replyUL = $(".reviewList");
-
+				
+				var id = $("#username").val(); //추가됨
+				
 				showList(1);
 
 				function showList(page) {
@@ -307,9 +311,10 @@ $(document)
 													+ list[i].content
 													+ '</p>';
 											str += "</div>";
-											str += "<button class='btn btn-warning btn-xs pull-right viewReview' data-toggle='modal' data-target='#myModal' onclick='viewReview(" + list[i].reviewNo + ")'>" 
-													+ "View" 
-													+ "</button>";
+												if(id==list[i].id && id!=null && id!=""){ //추가됨
+				                                       str += "<button class='btn btn-warning btn-xs pull-right' onclick='modifyReview(" + list[i].reviewNo + ")'>modify</button>";
+				                                       str += "<button class='btn btn-danger btn-xs pull-right' onclick='deleteReview(" + list[i].reviewNo + ")'>delete</button>";
+				                                }													
 											str += "<br>";
 											str += "</div>";
 										}
@@ -355,7 +360,6 @@ $(document)
 								+ (endNum + 1) + "'>Next</a></li>";
 					}
 					str += "</ul>";
-					console.log(str);
 					reviewPageFooter.html(str);
 				} //end showReviewPage
 
@@ -401,6 +405,158 @@ $(document)
 			});
 </script>
 
+<!-- 리뷰 등록 스크립트 -->
+<script type="text/javascript">
+$("#submitReview").on("click",function(e) {
+	e.preventDefault();
+
+	var reviewVO = $("form[name=review-form]").serialize();
+
+	$.ajax({
+		url : "/reviews/register",
+		type : "post",
+		data : reviewVO,
+		success : function() {
+			alert("리뷰를 작성하셨습니다.");
+			window.location.href = "view?productCode=" + $("#productCode").val();
+		},
+		error : function() {
+			alert("구매한 상품에만 리뷰를 작성하실 수 있습니다.");
+		}
+	});
+});
+</script>
+
+<!-- 모달 기본 스크립트 -->
+<script>
+	//Get the modal
+	var modal = document.getElementById("myModal");
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+	
+	//Get the cancle btn
+	var cancleBtn = document.getElementById("cancleBtn");
+	
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+	
+	cancleBtn.onclick = function() {
+	  modal.style.display = "none";
+	}
+	
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
+<!-- 리뷰 수정 스크립트 -->
+<script>
+function modifyReview(reviewNo){
+	
+	//Get the modal-header
+	modal.style.display = "block";
+	
+	
+	//Get the modal-body
+	var modalBody = $("#modal-body");
+	
+	var str = "";
+	
+	reviewService.getReview(reviewNo, function(data){ //review.js의 getReview 실헹해서 리뷰 데이타 가져오기
+		str += "<div class='single-review'>";
+		str += "<div class='review-heading'>";
+		str += "<div><b> No. " + data.reviewNo + "</b></div>";
+		str += "<div><i class='fa fa-clock-o'></i>" + reviewService.displayTime(data.reviewDate) + "</a></div>";
+		str += "</div>";
+		
+		str += "<div class='review-rating pull-right'>";
+		for (var j = 0; j < data.reviewPoint; j++) {
+			str += "<i class='fa fa-star'></i>";
+		}
+		for (var k = data.reviewPoint; k < 5; k++) {
+			str += "<i class='fa fa-star-o empty'></i>";
+		}
+		str += "</div>";
+				
+		str += '<div class="review-body">';
+		str += '<textarea id="content" class="form-control" style="min-width: 100%">' + data.content + '</textarea>';
+		str += "</div>";
+		str += "<br>";
+		str += "</div>";
+		
+		modalBody.html(str);
+	});
+	
+	
+	$("#modifyBtn").on("click", function(e){
+		e.preventDefault();
+		var content = $("#content").val();
+		var reviewDate = new Date();
+		
+		var reviewVO = {
+			reviewNo : reviewNo,
+			content : content,
+			reviewDate : reviewDate
+		};
+		console.log(reviewVO);
+		
+		$.ajax({
+			url : "/reviews/modify/" + reviewVO.reviewNo,
+			type : "put",
+			data : JSON.stringify(reviewVO),
+			contentType : "application/json; charset=utf-8",
+			headers: {"X-CSRF-TOKEN": $("input[name='_csrf']").val()},
+  //          beforeSend : function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+//                xhr.setRequestHeader("Accept", "application/json");
+               // xhr.setRequestHeader("content-Type", "application/json");
+              //  xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            //},
+			success : function() {  //삭제 완료 시 알림창을 띄우고, 모달창을 없애고, 새로고침을 한다.
+				alert("리뷰 수정 성공");
+				modal.style.display = "none";
+				window.location.href = "view?productCode=" + $("#productCode").val();
+			},
+			error : function(xhr, status, er) {
+				alert(er);
+			}
+		});
+		
+		
+	}); //end modifyBtn onClick
+	
+}
+</script>
+
+<!-- 리뷰 삭제 스크립트 -->
+<script>
+function deleteReview(reviewNo){
+	var deleteResult = confirm("해당 댓글을 삭제하시겠습니까?"); //confirm창으로 삭제 여부 선택
+	if(deleteResult == true){
+		$.ajax({
+			url : "/reviews/" + reviewNo,
+			type : "delete",
+			data : reviewNo,
+			headers: {"X-CSRF-TOKEN": $("input[name='_csrf']").val()},
+			success : function() { //삭제 완료 시 알림창을 띄우고, 모달창을 없애고, 새로고침을 한다.
+				alert("삭제 완료");
+				modal.style.display = "none";
+				window.location.href = "view?productCode=" + $("#productCode").val();
+			},
+			error : function(er) {
+				alert("리뷰 수정 실패" + er);
+			}
+		});
+	} else {
+		
+	}
+}
+</script>
 
 <!-- 카트 등록 스크립트 -->
 <script>

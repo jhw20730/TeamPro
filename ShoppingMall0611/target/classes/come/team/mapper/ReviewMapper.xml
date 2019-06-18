@@ -36,7 +36,7 @@
 	</select>
 	
 	<update id="modifyReview">
-		update TBL_REVIEW set content = #{content}, reviewPoint = #{reviewPoint} where reviewNo = #{reviewNo}
+		update TBL_REVIEW set content = #{content}, reviewDate = #{reviewDate} where reviewNo = #{reviewNo}
 	</update>
 	
 	<delete id="deleteReview">

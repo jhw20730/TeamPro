@@ -142,7 +142,7 @@
 									<a href="/customLogin" class="text-uppercase">Login</a> / <a href="/join" class="text-uppercase">Join</a>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
-									<b><sec:authentication property="principal.username"/>님</b><br> <!-- username means id -->
+									<b><sec:authentication property="principal.username" />님</b><br> <!-- username means id -->
 									<a href="/customLogout" class="text-uppercase">Logout</a>
 							</sec:authorize>
 							<ul class="custom-menu">

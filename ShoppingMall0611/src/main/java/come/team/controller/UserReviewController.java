@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -87,13 +88,25 @@ public class UserReviewController {
 		//ajax에서 error 처리하기
 	}
 
-	@PreAuthorize("hasRole{'ROLE_MEMBER'}")
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
+//	@ResponseBody
+//	@PreAuthorize("hasRole{'ROLE_MEMBER'}")
+//	@PostMapping(value = "/modify/{reviewNo}", 	produces = {
+//						MediaType.APPLICATION_XML_VALUE,
+//						MediaType.APPLICATION_JSON_UTF8_VALUE})
+//	public void modifyReview(@PathVariable("reviewVO") ReviewVO reviewVO) {
+//		//ajax로 reviewNo, 수정될 content를 담은 reviewVO를 전송
+//		log.info("start modify");
+//		log.info(reviewVO);
+//		reviewService.modifyReview(reviewVO);
+//		log.info("finish modify");
+//	}
+	
+	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value = "/modify/{reviewNo}",
 			consumes = "application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
-	public void modifyReview(@PathVariable("reviewVO") ReviewVO reviewVO) {
-		//ajax로 reviewNo, 수정될 content를 담은 reviewVO를 전송
+	public void modify(@RequestBody ReviewVO reviewVO) {
+		log.info(reviewVO);
 		reviewService.modifyReview(reviewVO);
 	}
  
