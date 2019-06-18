@@ -14,8 +14,10 @@ public interface ReviewMapper {
 	public int countAllReview(String productCode);
 	
 	public void registerReview(ReviewVO reviewVO);
-//	public int modifyReview(ReviewVO reviewVO);
-//	public int deleteReview(String reviewNo);
+	
+	public ReviewVO getReview(int reviewNo);
+	public void modifyReview(ReviewVO reviewVO);
+	public void deleteReview(@Param("reviewNo") int reviewNo, @Param("id") String id);
 	
 	public PaymentVO checkPayment(@Param("id") String id, @Param("productCode") String productCode);
 }

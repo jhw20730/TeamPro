@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="come.team.mapper.OrderMapper">
+	
+	<!-- 주문 정보 넣기 -->
+	<insert id="orderInput">
+		insert into tbl_payment (payNo, cartNo, id, name, price, productCode ,amount, address, contact)
+		values (tbl_payment_seq.nextval, #{cartNo}, #{id}, #{name}, #{price}, #{productCode}, #{amount}, #{address}, #{contact})
+	</insert>
+	
+	<!-- 주문 상세 정보 넣기 -->
+ 	<!-- <insert id="orderDetailInput">
+ 		insert into tbl_payment_detail (detailNo, productCode, amount)
+ 		select tbl_payment_detail_seq.nextval, productCode, amount
+ 			from tbl_cart
+ 	</insert> --> 
+ 	
+</mapper>

@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import come.team.domain.CartVO;
 import come.team.domain.Criteria;
+import come.team.domain.PaymentDetailVO;
+import come.team.domain.PaymentVO;
 import come.team.domain.ProductVO;
 import come.team.service.CartService;
+import come.team.service.OrderService;
 import come.team.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -34,6 +37,7 @@ public class CartController {
 	
 	private CartService cartService;
 	private ProductService productService;
+	private OrderService orderService;
 	
 	@PostMapping("/addCart")
 	public String addCart(CartVO cart) {
@@ -91,5 +95,15 @@ public class CartController {
 		}
 				
 		return new ResponseEntity<List<CartVO>>(cartList, HttpStatus.OK);
+	}
+	
+	@PostMapping("/orderInput")
+	public String orderInput(PaymentVO payment, PaymentDetailVO paymentDetail) {
+		log.info("start orderInput");
+		orderService.orderInput(payment);
+		/*orderService.orderDetailInput(paymentDetail);*/
+		log.info("finish orderInput");
+		return "redirect:/";  // 주문 내역 확인 페이지로 이동
+				
 	}
 }
