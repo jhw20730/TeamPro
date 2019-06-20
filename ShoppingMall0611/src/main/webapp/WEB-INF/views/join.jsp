@@ -19,7 +19,7 @@
 			</div>
 			<!-- /section-title -->
 
-			<form role="form" action="/join" method="post">
+			<form role="form" action="/join" method="post" style="margin:80px 0px 0px 25px;">
 					<div class="form-group">
 						<label>아이디</label>
 						<input class="form-control" name="id">

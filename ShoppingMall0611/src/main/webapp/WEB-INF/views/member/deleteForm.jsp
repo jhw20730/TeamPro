@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<!-- /section-title -->
-				<form role="form" action="/member/deletePro" method="post">
+				<form role="form" action="/member/deletePro" method="post" style="margin:80px 0px 0px 15px;">
 					<input type="hidden" name="id" value="<sec:authentication property='principal.username'/>">
 					<input type="submit" value="탈퇴">
 					<input type="button" value="취소" onclick="location.href='/member/getMember'">

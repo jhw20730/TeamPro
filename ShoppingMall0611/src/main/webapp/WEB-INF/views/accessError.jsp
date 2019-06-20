@@ -18,8 +18,10 @@
 				</div>
 			</div>
 			<!-- /section-title -->
+			<div style="margin:80px 0px 0px 25px;">
 			<h2>권한이 없습니다.</h2>
 			<h4><button onclick="location.href='/'">홈으로</button></h4>
+			</div>
 			
 		</div>
 		<!-- /row -->

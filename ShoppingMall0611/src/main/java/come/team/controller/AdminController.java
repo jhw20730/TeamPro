@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import come.team.domain.Criteria;
 import come.team.domain.PageDTO;
+import come.team.domain.PaymentVO;
 import come.team.domain.ProductVO;
 import come.team.service.MemberService;
 import come.team.service.ProductService;
@@ -103,11 +104,12 @@ public class AdminController {
 //			return mv;
 //		}
 		
-		// 관리자가 회원 정보 확인 (DateFormat 전달)
-		@GetMapping("/memberview")
-		public void memberview(Model model, String id) {
-			DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
-			model.addAttribute("mem", memberService.getMember(id));
-			model.addAttribute("format", format);
-		}
+	// 관리자가 회원 정보 확인 (DateFormat 전달)
+	@GetMapping("/memberview")
+	public void memberview(Model model, String id) {
+		DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
+		model.addAttribute("mem", memberService.getMember(id));
+		model.addAttribute("format", format);
+	}
+	
 }

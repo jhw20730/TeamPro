@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>	
-	
+<style>
+td{
+margin: 5px;
+}
+</style>
 
 <%@include file="../includes/header.jsp"%>
 
@@ -19,7 +23,7 @@
 			</div>
 			<!-- /section-title -->
 			<form action="/inquiry/delete" method="post" onsubmit="return false;">
-			<div class="container" style="padding: 15px">
+			<div class="container" style="padding: 20px">
 				<div class="inquiry" style="padding-left: 15px">
 					<h5>${inquiry.inquiryNo }번째문의글</h5>
 					<table width="500px" style="border: 1px">
@@ -44,7 +48,7 @@
 							<td><textarea cols="30" name="content" id="content">${inquiry.content } </textarea></td>
 						</tr>
 					</table>
-				</div>
+				</div><br>
 				<button onclick="location.href='/inquiry/list'" class="btn btn-primary">Back to	list</button>
 				<button id="modifyBtn" class="btn btn-primary">수정하기</button>
 				<button id="deleteBtn" class="btn btn-danger">삭제하기</button>

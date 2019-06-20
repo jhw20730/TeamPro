@@ -5,8 +5,8 @@
 <mapper namespace="come.team.mapper.CartMapper">
 	<!-- 카트담기 -->
 	<insert id="addCart">
-		insert into tbl_cart (cartNo, productCode, id, amount, price, productName, description)
-		values (tbl_cart_seq.nextval, #{productCode}, #{id}, #{amount}, #{price}, #{productName}, #{description})
+		insert into tbl_cart (cartNo, productCode, id, amount, price)
+		values (tbl_cart_seq.nextval, #{productCode}, #{id}, #{amount}, #{price})
 	</insert>
 	
 	<!-- 카트리스트 -->
@@ -19,5 +19,11 @@
 		delete tbl_cart
 		where cartNo = #{cartNo}
 	</delete>
- 
+ 	
+ 	<!-- 주문 정보 입력 후 카트 비우기 -->
+ 	<delete id="deleteCartAfterOrder">
+ 		delete tbl_cart
+ 		where id = #{id}
+ 	</delete>
+ 	
 </mapper>

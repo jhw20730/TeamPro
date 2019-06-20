@@ -25,7 +25,7 @@
 					<td colspan='2'>${no.title }</td>
 				</tr>
 				<tr>
-					<td colspan='2'>${no.content }</td>
+					<td colspan='2'><textarea cols="80" rows="16">${no.content }</textarea></td>
 				</tr>
 				<tr>
 					<td colspan='2'>${format.format(no.noticeDate) }</td>

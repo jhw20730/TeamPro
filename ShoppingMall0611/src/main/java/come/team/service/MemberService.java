@@ -10,6 +10,7 @@ public interface MemberService {
 	String findPasswordById(String id);    //로그인에 필요한 비밀번호 불러오기
 	
 	MemberVO getMember(String id);
+	
 	void join(MemberVO vo); //회원 가입, 회원 정보 등록
 	
 	void update(MemberVO vo); //회원 정보 수정

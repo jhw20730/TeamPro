@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<!-- /section-title -->
-				<form role="form" action="/member/modify" method="post">
+				<form role="form" action="/member/modify" method="post" style="margin:80px 0px 0px 25px;">
 					<div class="form-group">
 						<label>아이디</label>
 						<input class="form-control" name='id' 
@@ -50,12 +50,18 @@
 						<input class="form-control" type="text" name='email' 
 						value="${member.email}">
 					</div>
+					
+					<div class="form-group">
+						<label>Point</label>
+						<input class="form-control" type="text" name='point' 
+						value="${member.point}">
+					</div>
 				
 					<button type="submit" class="btn btn-default">수정</button>
 					<button type="reset" class="btn btn-default">RESET</button>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
-					<button onclick="location.href='/member/deleteForm?id=${member.id}'" class="btn btn-default">회원 탈퇴</button>
+					<button onclick="location.href='/member/deleteForm?id=${member.id}'" class="btn btn-default" style="margin-left:40px;">회원 탈퇴</button>
 					
 
 		</div>

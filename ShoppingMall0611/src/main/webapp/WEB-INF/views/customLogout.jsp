@@ -19,7 +19,7 @@
 			</div>
 			<!-- /section-title -->
 
-			<form role="form" action="/customLogout" method="post">
+			<form role="form" action="/customLogout" method="post" style="margin:80px 0px 0px 15px;">
 					<button class="btn btn-lg btn-default">로그아웃</button>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>

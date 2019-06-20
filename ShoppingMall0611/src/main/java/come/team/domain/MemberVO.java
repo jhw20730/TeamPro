@@ -12,6 +12,7 @@ public class MemberVO {
 	private String address;
 	private String contact;
 	private String email;
+	private int point;
 	private Date regiDate;
 	private Date updateDate;
 	private boolean enabled;

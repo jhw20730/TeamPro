@@ -35,7 +35,7 @@
 							 readonly="readonly">
 						</div>
 						<div class="inquiry">
-							<label>내용</label>
+							<label>내용</label><br>
 							<textarea id="content" name="content" rows="5" placeholder="내용을 작성해주세요"></textarea>
 						</div>
 						<input type="hidden" name="id" value="<sec:authentication property='principal.username'/>"> 

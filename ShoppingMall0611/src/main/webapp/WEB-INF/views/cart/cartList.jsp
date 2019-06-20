@@ -80,10 +80,8 @@
 			<table class="table table-condensed">
 				<thead>
 					<tr class="cart_menu">
-						<td class="image">상품</td>
-						<td>이름</td>
+						<td class="">상품</td>
 						<td>코드</td>
-						<td>설명</td>
 						<td class="price">개당 가격</td>
 						<td class="quantity">구입 수량</td>
 						<td class="totalPrice">최종 가격</td>
@@ -95,22 +93,16 @@
 
 					<c:forEach items="${cart }" var="cart">
 						<tr>
-							<td class="cart_product"><a href=""><img
-									src="images/cart/one.png" alt=""></a></td>
 							<td>
 								<div class="checkBox">
 									<input type="checkbox" name="chBox" class="chBox"
 										data-cartNum="${cart.cartNo}" />
-								</div>
-								<p>${cart.productName }</p>
+								</div>	
 							</td>
 							<td>
 								<p>${cart.productCode }</p>
 							</td>
 							<td>
-								<p>${cart.description }</p>
-							</td>
-							<td class="cart_price">
 								<p>
 									<fmt:formatNumber pattern="###,###,###" value="${cart.price }" />
 									원

@@ -11,4 +11,6 @@ public interface CartMapper {
 	
 	public void deleteCart(CartVO cart);//카트삭제	
 	
+	public void deleteCartAfterOrder(String id); // 주문 정보 입력 후 카트 비우기
+	
 }

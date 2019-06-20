@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class PaymentVO {
+public class PaymentListVO {
 	
 	String payCode;
 	String id;
@@ -16,6 +16,10 @@ public class PaymentVO {
 	String address;
 	String contact;
 	Date payDate;
+	String productName;
+	
+	int detailNo;
+	
 	
 	
 

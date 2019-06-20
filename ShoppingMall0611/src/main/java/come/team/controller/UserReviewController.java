@@ -56,10 +56,7 @@ public class UserReviewController {
 		reviewVO.setId(memberVO.getId());
 		reviewVO.setName(memberVO.getName());
 		
-		PaymentVO paymentVO = reviewService.checkPayment(reviewVO.getId(), reviewVO.getProductCode());
-		
-		reviewVO.setCartNo(paymentVO.getCartNo());
-		reviewVO.setPayNo(paymentVO.getPayNo());
+		//PaymentVO paymentVO = reviewService.checkPayment(reviewVO.getId(), reviewVO.getProductCode());
 		
 		reviewService.registerReview(reviewVO);
 		log.info("registered " + reviewVO);

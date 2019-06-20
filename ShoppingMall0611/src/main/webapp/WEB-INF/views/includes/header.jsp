@@ -164,6 +164,7 @@
 								<sec:authorize access="isAuthenticated()">
 									<li><a href="/member/getMember"><i class="fa fa-user-o"></i> My Account</a></li>
 									<li><a href="/cart/cartList"><i class="fa fa-heart-o"></i> My Cart</a></li>
+									<li><a href="/cart/paymentList"><i class="fa fa-heart-o"></i> Order List</a></li>
 									<li><a href="/customLogout"><i class="fa fa-unlock-alt"></i> Logout</a></li>
 								</sec:authorize>
 								
@@ -171,6 +172,7 @@
 								<sec:authorize access="isAnonymous()">
 									<li><a href="/customLogin"><i class="fa fa-user-o"></i> My Account</a></li>
 									<li><a href="/customLogin"><i class="fa fa-heart-o"></i> My Cart</a></li>
+									<li><a href="/customLogin"><i class="fa fa-heart-o"></i> Order List</a></li>
 									<li><a href="/customLogin"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								</sec:authorize>
 								<li><a href="/join"><i class="fa fa-user-plus"></i> Create An Account</a></li>

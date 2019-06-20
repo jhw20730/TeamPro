@@ -7,9 +7,8 @@ import lombok.Data;
 @Data
 public class ReviewVO {
 	int reviewNo; //seq
-	int cartNo; 
 	String productCode; //form
-	int payNo; 
+	String payCode; 
 	String id; //principal로 가져오기
 	String name; //principal -> getMember -> getName
 	String content; //form

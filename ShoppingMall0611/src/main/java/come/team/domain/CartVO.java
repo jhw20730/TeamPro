@@ -1,5 +1,7 @@
 package come.team.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -8,9 +10,9 @@ public class CartVO {
 	private String productCode;
 	private String id;
 	private int amount;
+	private String productName;
 	
 	//added
-	private	String productName;
 	private	int price;
-	private	String description;
+	private	Date addDate;
 }

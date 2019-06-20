@@ -8,8 +8,7 @@ import lombok.Data;
 public class PaymentDetailVO {
 	
 	int detailNo;
-	int cartNo;
-	int payNo;
+	String payCode;
 	String id;
 	String productCode;
 	int amount;

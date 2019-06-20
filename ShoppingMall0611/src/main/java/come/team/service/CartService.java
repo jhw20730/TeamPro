@@ -12,4 +12,6 @@ public interface CartService {
 	public List<CartVO> getCartList(String id); //한 계정의 장바구니 목록 불러오기
 	
 	public void deleteCart(CartVO cart);//카트삭제
+	
+	public void deleteCartAfterOrder(String id); // 주문 정보 입력 후 카트 비우기
 }

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
+<style>
+td{
+margin: 5px;
+}
+</style>
 <%@include file="../includes/header.jsp"%>
 
 <!-- section -->
@@ -46,7 +50,7 @@
 						</tr>
 					</table>
 				</div>
-			
+				<br>
 				<input id="btnSubmit" type="submit" class="btn btn-primary" value="수정">
 				<button onclick="location.href='/inquiry/list'" class="btn btn-primary">취소</button>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

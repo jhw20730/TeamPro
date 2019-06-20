@@ -42,7 +42,7 @@ td {
 				</tr>
 				<tr>
 					<td><h2>결제정보</h2></td>
-					<td><a id="admin_href" href="/admin/list">결제 정보 확인</a></td>
+					<td><a id="admin_href" href="/cart/adminPaymentList">결제 정보 확인</a></td>
 				</tr>
 				<tr>
 					<td><h2>문의사항</h2></td>

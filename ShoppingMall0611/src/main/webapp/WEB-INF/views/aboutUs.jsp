@@ -26,7 +26,7 @@ margin-top: -400px;
 				</div>
 			</div>
 			
-			<div id="content-bd">
+			<div style="margin:80px 0px 0px 25px; font-size:105%;">
 				저희 쇼핑몰은 PC와 PC 주변기기를 판매하는 온라인 거래 웹 사이트입니다.<br>
 				데스크탑, 노트북, 모니터 등의 기기를 그 어느 곳보다 좋은 품질과 가격으로 구매할 수 있습니다.<br>
 				고객의 요구에 맞는 기기를 검색하고 구매할 수 있습니다.<br>

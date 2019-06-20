@@ -39,4 +39,11 @@ public class CartServiceImpl implements CartService {
 		
 	}
 
+	// 주문 정보 입력 후 카트 비우기
+	@Override
+	public void deleteCartAfterOrder(String id) {
+		mapper.deleteCartAfterOrder(id);
+		
+	}
+
 }
