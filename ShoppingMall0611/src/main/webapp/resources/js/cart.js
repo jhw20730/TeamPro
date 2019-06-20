@@ -3,7 +3,7 @@ var cartService = (function(){
 	function getList(param, callback, error) {
 
 	
-		$.getJSON("/cart/list/json.json", function(data){
+		$.getJSON("/cart/cartList/json.json", function(data){
 				if(callback){
 					callback(data);
 				}

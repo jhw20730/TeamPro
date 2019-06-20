@@ -185,7 +185,6 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<strong class="text-uppercase">My Cart:</strong>
 								<br>
-								<span>35.20$</span> <!-- ì¥ë°êµ¬ë ì´ ê°ê²© count -->
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
@@ -224,12 +223,12 @@
 							var str = "";
 							for(var i = 0, len = list.length || 0; i < len; i++){
 								str += '<div class="product product-widget">';
-								//str += '<div class="product-thumb">';
-								//str += '<img src="" alt="">';
-								//str += '</div>';
+								str += '<div class="product-thumb">';
+								str += '<img src="" alt="">';
+								str += '</div>';
 								str += '<div class="product-body">';
 								str += '<h3 class="product-price">' + list[i].price + '<span class="qty">' + list[i].amount + '</span></h3>';
-								str += '<h2 class="product-name"><a href="/product/view?productCode=' + list[i].productCode + '">' + list[i].productName + '</a></h2>';
+								str += '<h2 class="product-name"><a href="/product/view?productCode=' + list[i].productCode + '">' + list[i].productCode + '</a></h2>';
 								str += '</div>'; //end productBody
 								str += '</div>'; //end product widget
 							}
