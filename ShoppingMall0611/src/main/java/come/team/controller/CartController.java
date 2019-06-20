@@ -109,7 +109,7 @@ public class CartController {
 	
 	// 주문 정보 입력
 	@PostMapping("/orderInput")
-	public String orderInput(PaymentVO payment, PaymentDetailVO paymentDetail, MemberVO member, String id) throws Exception{
+	public String orderInput(PaymentVO payment, PaymentDetailVO paymentDetail, MemberVO member, Principal principal) throws Exception{
 		log.info("start orderInput");
 		
 		//주문 번호 만들기(오늘날짜_랜덤으로 부여되는 번호)
@@ -127,6 +127,8 @@ public class CartController {
 		String payCode = ymd + "_" + subNum;
 		//
 		
+		String id = principal.getName();
+		
 		payment.setPayCode(payCode); // 주문 정보에 생성된 payCode 주입
 		
 		orderService.orderInput(payment); // 주문 정보 입력
@@ -135,9 +137,9 @@ public class CartController {
 		member = memberService.getMember(id); //id에 대한 회원정보 받아오기
 		
 		int MemberPoint = member.getPoint(); //해당 회원정보의 point 받아오기
-		int price = payment.getPrice(); // 주문 과정에 이루어진 총 결제 금액
+		int totalPrice = payment.getTotalPrice(); // 주문 과정에 이루어진 총 결제 금액
 		
-		member.setPoint(MemberPoint - price); // 회원이 가지고 있는 point - 총 결제금액을 memberVO에 set
+		member.setPoint(MemberPoint - totalPrice); // 회원이 가지고 있는 point - 총 결제금액을 memberVO에 set
 		orderService.updatePoint(member); //바뀐 point를 회원정보에서 수정
 		//
 		

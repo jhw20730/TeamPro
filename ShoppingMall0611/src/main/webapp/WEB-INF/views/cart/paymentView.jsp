@@ -24,7 +24,7 @@
 						<c:if test="${status.first}">
    							<p><span>수령인</span> ${paymentView.name}</p>
     						<p><span>주소</span> ${paymentView.address}</p>
-    						<p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${paymentView.price}" /> 원</p>
+    						<p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${paymentView.totalPrice}" /> 원</p>
    						</c:if>
 					</c:forEach>
 				</ul>
@@ -35,8 +35,6 @@
 					<li style="margin-left:25px; border:1px solid black; font-size:110%;">
 						<div class="gdsInfo">
 							<p>	
-								<span>상품코드</span><a href="/product/view?productCode=${paymentView.productCode}"> ${paymentView.productCode}</a>
-								<br>
 								<span>상품명</span> ${paymentView.productName}<br /> 
 								<span>개당 가격</span>
 								<fmt:formatNumber pattern="###,###,###"

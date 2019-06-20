@@ -44,6 +44,7 @@ public class MemberController {
 		log.info("post modify");
 		BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder();
 		memberVO.setPassword(passEncoder.encode(memberVO.getPassword()));
+		memberVO.setPoint(memberVO.getPoint());
 		service.update(memberVO);
 		//
 		status.setComplete();

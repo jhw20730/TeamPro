@@ -45,7 +45,7 @@ alter table tbl_user modify (point default 10000);
 --regiDate는 default값으로 sysdate
 alter table tbl_user modify (regiDate default sysdate);
 --속성값 수정--
-alter table tbl_user add (enabled char(1) default '1');
+alter table tbl_user modify (enabled char(1) default '1');
 alter table tbl_user modify (updateDate date default sysdate);
 
 drop table tbl_user;
@@ -103,7 +103,7 @@ create table tbl_payment(
     address varchar2(100),
     contact varchar2(50),
     amount number,
-    price number,
+    totalPrice number,
     payDate DATE default sysdate
 );
 --기본키 설정(payCode)--
@@ -113,6 +113,8 @@ alter table tbl_payment add constraint fk_payment1
 foreign key (id) references tbl_user (id) on delete set null; 
 --productCode 컬럼 추가
 alter table tbl_payment add (productCode varchar2(100));
+alter table tbl_payment add (totalPrice number);
+alter table tbl_payment drop column price;
 commit;
 delete from tbl_payment;
 drop table tbl_payment;

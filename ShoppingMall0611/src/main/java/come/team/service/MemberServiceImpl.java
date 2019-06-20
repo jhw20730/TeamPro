@@ -40,13 +40,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void update(MemberVO vo) { //회원정보 수정
-		mapper.update(vo);
+		mapper.updateMember(vo);
 		
 	}
 
 	@Override
 	public void delete(String id) {// 회원탈퇴
-		mapper.delete(id);
+		mapper.deleteMember(id);
 	}
 
 }

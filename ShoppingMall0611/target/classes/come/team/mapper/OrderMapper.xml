@@ -6,8 +6,8 @@
 	
 	<!-- 주문 정보 넣기 -->
 	<insert id="orderInput">
-		insert into tbl_payment (payCode, id, name, price, productCode ,amount, address, contact)
-		values (#{payCode}, #{id}, #{name}, #{price}, #{productCode}, #{amount}, #{address}, #{contact})
+		insert into tbl_payment (payCode, id, name, totalPrice, productCode ,amount, address, contact)
+		values (#{payCode}, #{id}, #{name}, #{totalPrice}, #{productCode}, #{amount}, #{address}, #{contact})
 	</insert>
 	
 	<!-- 주문 상세 정보 넣기 -->
@@ -20,7 +20,7 @@
  	<!-- 주문 목록 -->
  	<select id="paymentList" resultType="come.team.domain.PaymentVO">
  		select
-     		payCode, id, name, address, contact, amount, price, payDate, productCode
+     		payCode, id, name, address, contact, amount, totalPrice, payDate, productCode
  		from tbl_payment 
      where id = #{id}
  	</select>
@@ -28,7 +28,7 @@
  	<!-- 주문 상세 조회 -->
  	<select id="paymentView" resultType="come.team.domain.PaymentListVO">
  		select
-    		p.payCode, p.id, p.name, p.address, p.contact, p.amount, p.price, p.payDate, p.productCode,
+    		p.payCode, p.id, p.name, p.address, p.contact, p.totalPrice, p.amount, p.payDate, p.productCode,
      		d.detailNo, d.productCode, d.amount,
      		g.productName, g.price
  		from tbl_payment p

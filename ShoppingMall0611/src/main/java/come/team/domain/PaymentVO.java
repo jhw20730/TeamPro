@@ -10,7 +10,7 @@ public class PaymentVO {
 	String payCode;
 	String id;
 	String name;
-	int price;
+	int totalPrice;
 	int amount;
 	String productCode;
 	String address;

@@ -205,7 +205,7 @@
 			</div>
 			<!-- header -->
 			<script type="text/javascript" src="../../../resources/js/cart.js"></script>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 				$(document).ready(function() {
 					
 					var myCart = $(".shopping-cart-list");
@@ -237,7 +237,7 @@
 					} //end showCartList
 					
 				}); // end document.ready
-			</script>
+			</script> -->
 			
 	<!-- NAVIGATION -->
 	<div id="navigation">
