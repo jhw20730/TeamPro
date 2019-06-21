@@ -10,11 +10,11 @@ import come.team.domain.ReplyVO;
 
 public interface InquiryService {
 
-	public List<InquiryVO> getInquiryList(Criteria criteria);
+	public List<InquiryVO> getInquiryList(Criteria criteria); // 문의사항 글 리스트
 	
-	public int getInquiryNum();
+	public int getInquiryNum(); // 문의사항 글 번호 
 	
-	public InquiryVO getInquiryView(int inquiryNo);
+	public InquiryVO getInquiryView(int inquiryNo); // 문의사항 글 상세 조회
 	
 	public void registerInquiry(InquiryVO inquiryVO);	//게시물 작성
 	

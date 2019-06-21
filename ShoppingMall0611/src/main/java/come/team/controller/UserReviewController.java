@@ -47,8 +47,9 @@ public class UserReviewController {
 		return new ResponseEntity<ReviewPageDTO>(reviewService.getReviewListPage(criteria, productCode), HttpStatus.OK);
 	}
 	
+	// 리뷰 작성
 	@ResponseBody
-	@PreAuthorize("hasRole{'ROLE_MEMBER'}")
+	@PreAuthorize("hasRole{'ROLE_MEMBER'}") // 사용자만
 	@PostMapping("/register")
 	public void registerReview(Principal principal, ReviewVO reviewVO) {
 		MemberVO memberVO = memberService.getMember(principal.getName());
@@ -72,7 +73,8 @@ public class UserReviewController {
 		return new ResponseEntity<ReviewVO>(reviewService.getReview(reviewNo), HttpStatus.OK);
 	
 	}
-
+	
+	// 리뷰 삭제
 	/*@PreAuthorize("hasRole{'ROLE_MEMBER'}")*/
 	@DeleteMapping(value = "/{reviewNo}",
 			produces = {
@@ -85,6 +87,7 @@ public class UserReviewController {
 		//ajax에서 error 처리하기
 	}
 	
+	// 리뷰 수정
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value = "/modify/{reviewNo}",
 			consumes = "application/json",

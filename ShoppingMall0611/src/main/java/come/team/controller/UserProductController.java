@@ -26,6 +26,7 @@ public class UserProductController {
 	/*private CartService cartservice;*/
 //	private ReviewService reviewService;
 	
+	// 상품 리스트 보여주기
 	@GetMapping("/list")
 	public void list(Criteria criteria, Model model) {
 		
@@ -41,6 +42,7 @@ public class UserProductController {
 		
 	}
 	
+	// 상품 상세 정보 조회
 	@GetMapping("/view")
 	public void view(String productCode, Model model) throws Exception {
 		ProductVO productVO = productService.productView(productCode);

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AuthVO {
-	private String id;
-	private String auth;
+	private String id; //아이디 
+	private String auth; //권한
 }

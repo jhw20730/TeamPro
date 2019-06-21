@@ -9,7 +9,7 @@ public interface MemberService {
 	List<MemberVO> list();    //전체 유저
 	String findPasswordById(String id);    //로그인에 필요한 비밀번호 불러오기
 	
-	MemberVO getMember(String id);
+	MemberVO getMember(String id); // 회원 정보 얻어 오기
 	
 	void join(MemberVO vo); //회원 가입, 회원 정보 등록
 	

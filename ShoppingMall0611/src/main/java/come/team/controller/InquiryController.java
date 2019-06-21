@@ -30,6 +30,7 @@ public class InquiryController {
 	private InquiryService inquiryService;
 	private ReplyService replyService;
 	
+	// 문의 사항 리스트
 	@GetMapping("/list")
 	public void getInquiryList(Criteria criteria, Model model) {
 		
@@ -45,6 +46,7 @@ public class InquiryController {
 		
 	}
 	
+	// 문의 사항 상세 조회
 	@GetMapping("/view")
 	public void getInquiryView(int inquiryNo, Model model) {
 		
@@ -89,7 +91,7 @@ public class InquiryController {
 	
 	
 	//게시물 수정 페이지로 매핑
-	@PreAuthorize("principal.username == #id")
+	@PreAuthorize("principal.username == #id") // 작성자만 수정할 수 있게끔
 	@GetMapping("/modifyForm")
 	public void getModifyInquiry(int inquiryNo, Model model) {
 		log.warn("=======================");
@@ -99,7 +101,7 @@ public class InquiryController {
 	}
 		
 	//게시물 수정
-	@PreAuthorize("principal.username == #id")
+	@PreAuthorize("principal.username == #id") // 작성자만 삭제할 수 있게끔
 	@PostMapping("/modifyUpdate")
 	public String postModifyInquiry(InquiryVO inquiryVO, Model model) {
 			

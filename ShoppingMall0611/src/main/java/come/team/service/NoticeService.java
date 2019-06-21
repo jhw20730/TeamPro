@@ -6,14 +6,14 @@ import come.team.domain.NoticeVO;
 
 public interface NoticeService {
 	
-	public List<NoticeVO> list();
+	public List<NoticeVO> list(); //공지사항 글 리스트
 	
-	public NoticeVO view(int noticeNo);
+	public NoticeVO view(int noticeNo); //공지사항 글 상세 조회
 	
-	public void insert(NoticeVO vo);
+	public void insert(NoticeVO vo); //공지사항 글 작성
 	
-	public void update(NoticeVO vo);
+	public void update(NoticeVO vo); // 공지사항 글 수정
 	
-	public void delete(int noticeNo);
+	public void delete(int noticeNo); // 공지사항 글 삭제
 
 }

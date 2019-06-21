@@ -45,6 +45,7 @@ public class CartController {
 	private OrderService orderService;
 	private MemberService memberService;
 	
+	// 장바구니 담기	
 	@PostMapping("/addCart")
 	public String addCart(CartVO cart) {
 		log.info("addCart start");
@@ -53,6 +54,7 @@ public class CartController {
 		return "redirect:/cart/cartList";
 	}
 	
+	// 장바구니 페이지 매핑
 	@GetMapping("/cartList")
 	public void getCartList(Model model, Criteria criteria, Principal principal) {
 		log.info("get cartList");
@@ -66,7 +68,7 @@ public class CartController {
 		model.addAttribute("cart", cartList);
 	}
 	
-	// 카트 삭제
+	// 장바구니 내용 삭제
 	@ResponseBody
 	@PostMapping(value = "/deleteCart")
 	public void deleteCart(@RequestParam(value = "chbox[]") List<String> chArr) throws Exception {
